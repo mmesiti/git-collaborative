@@ -24,7 +24,7 @@
 
 The main change is that I am adding a little more content.
 
-My impression is that in coderefinery workshops 
+My impression is that in CodeRefinery workshops 
 the pace is a bit relaxed, 
 and more could be done in a in-person setting
 (which is the plan here).
@@ -41,10 +41,10 @@ for an intermediate Git course at KIT.
 
 The audience of this course is expected 
 to be slightly more familiar with git 
-than target of the original Coderefinery workshops
+than target of the original CodeRefinery workshops
 (which start on day 1 assuming no git knowledge - so I think),
 and definitely more advanced than the audience 
-that would attend a Sofware Carpentry lesson on Git.
+that would attend a Software Carpentry lesson on Git.
 
 At KIT, we do offer the software carpentry curriculum already twice a year, 
 complete beginners should attend those courses instead of coming to this course.
@@ -62,13 +62,13 @@ By the end of this lesson, learners should:
 - Understand the concept of remotes
 - Be able to describe the difference between local and remote branches
 - Be able to describe the difference between centralized and forking workflows
-- Be able to work efficently with forges:
+- Be able to work efficiently with forges:
   - Know how to use pull requests or merge requests to submit changes to another projects
   - Know how to reference issues in commits or pull/merge requests and how to auto-close issues
   - Know how to update a fork
 - **Be able to contribute in code review as submitter or reviewer**
 - Know the difference between merge and rebase, in particular:
-  - Know the golden rule of rebasing
+  - Know the golden rule of rebase
   - What force push means (what are the consequences)
   - What are the advantages of a linear commit history
 - Choose the right tool for fixing common problems with Git _(I know this is a little vague)_/
