@@ -1,7 +1,94 @@
 # Instructor guide
 
+## Schedule
 
-## Schedule Day 3
+- 08:50 - 09:00: Soft start and icebreaker question
+- 09:00 - 09:15: Necessary introductions, forming groups. 
+    - Many people might want to use gitlab.kit.edu for this (or something else).
+      It should be perfectly fine, but then the audience should be already segmented
+      and different "tribes" should sit together.
+- 09:15 - 09:30: [Concepts around collaboration](https://mmesiti.github.io/git-collaborative/remotes/)
+    - Explain terms: Pull, push, clone, fork. Focus on pull and not fetch.
+    - Focus more on clone and less on generating from templates and importing.
+- 09:30 - 10:30: [Centralized workflow](https://mmesiti.github.io/git-collaborative/centralized/)
+    - 09:30 - 09:45: Explain concepts and outcome
+    - 09:45 - 10:30: [Exercise and walkthrough](https://mmesiti.github.io/git-collaborative/centralized/#exercise-preparation)
+- 10:30 - 10:45: Holy Break
+- 10:45 - 11:45: [Distributed version control and forking workflow](https://coderefinery.github.io/git-collaborative/distributed/)
+    - 10:45 - 11:00: Explain concepts and outcome
+    - 11:00 - 11:45: [Exercise and walkthrough](https://mmesiti.github.io/git-collaborative/distributed/#exercise-preparation)
+- 11:45 - 12:00: Holy Break 
+- 13:10 - 13:30: [How to contribute changes to somebody else’s project](https://coderefinery.github.io/git-collaborative/contributing/) and Q&A
+
+## Why I modified this lesson
+
+The main change is that I am adding a little more content.
+
+My impression is that in coderefinery workshops 
+the pace is a bit relaxed, 
+and more could be done in a in-person setting
+(which is the plan here).
+
+I would not let attendees work on their own on an exercise 
+for 30 minutes without feedback,
+so I changed the times of the exercise lessons 
+to also include instructor feedback. 
+
+### Audience intended for this course
+
+There seems to be quite a demand 
+for an intermediate Git course at KIT.
+
+The audience of this course is expected 
+to be slightly more familiar with git 
+than target of the original Coderefinery workshops
+(which start on day 1 assuming no git knowledge - so I think),
+and definitely more advanced than the audience 
+that would attend a Sofware Carpentry lesson on Git.
+
+At KIT, we do offer the software carpentry curriculum already twice a year, 
+complete beginners should attend those courses instead of coming to this course.
+
+## Intended prerequisites
+At the beginning of this lesson, learners:
+- Must know the basic git commands (status/diff/add/commit)
+- Should be comfortable with the command line 
+- Should Be familiar with the usual git workflow (pull/add/commit/push)
+- Probably already have used github or similar
+
+## Intended learning outcomes
+
+By the end of this lesson, learners should:
+- Understand the concept of remotes
+- Be able to describe the difference between local and remote branches
+- Be able to describe the difference between centralized and forking workflows
+- Be able to work efficently with forges:
+  - Know how to use pull requests or merge requests to submit changes to another projects
+  - Know how to reference issues in commits or pull/merge requests and how to auto-close issues
+  - Know how to update a fork
+- **Be able to contribute in code review as submitter or reviewer**
+- Know the difference between merge and rebase, in particular:
+  - Know the golden rule of rebasing
+  - What force push means (what are the consequences)
+  - What are the advantages of a linear commit history
+- Choose the right tool for fixing common problems with Git _(I know this is a little vague)_/
+  This includes:
+  - issues with lost data when using git add/checkout/restore 
+  - cleaning their commit history if they so wish (rebase)
+  - deal with large binary files (lfs/annex)
+  - deal with large repositories (partial cloning)
+  - using long complex commands efficiently (aliases)
+  - use git to analyse development history (pickaxe, blame, bisect)
+  - re-discover which branches they had been working on before
+  - dealing with nested repositories (existence of submodules)
+  - when you do not want to add/commit part of the changes you made to a file,
+    without having to undo (potentially big) changes in your editor (-p)
+  - collaboration between windows and *nix users (line ending issues)
+
+
+# Instructor guide - original
+
+## Schedule - Original 
 
 - 08:50 - 09:00: Soft start and icebreaker question
 - 09:00 - 09:15: Recap Git, any HedgeDoc questions to highlight
@@ -23,11 +110,13 @@
 - 13:10 - 13:30: [How to contribute changes to somebody else’s project](https://coderefinery.github.io/git-collaborative/contributing/) and Q&A
 
 
-## Why we teach this lesson
+## Why we teach this lesson - original
 
-In order to collaborate efficiently using Git, it's essential to have a solid
-understanding of how remotes work, and how to contribute changes through pull
-requests or merge requests. The [git-intro lesson](https://coderefinery.github.io/git-intro/)
+In order to collaborate efficiently using Git, 
+it's essential to have a solid understanding of how remotes work, 
+and how to contribute changes through pull
+requests or merge requests. 
+The [git-intro lesson](https://coderefinery.github.io/git-intro/)
 teaches participants how to
 work efficiently with Git when there is only one developer (more precisely: how
 to work when there are no remote Git repositories yet in the picture). This
@@ -37,8 +126,9 @@ GitHub.
 
 This lesson is meant to directly benefit workshop participants who have prior
 experience with Git, enabling them to put collaborative workflows involving
-code review directly into practice when they return to their normal work. For
-novice Git users (who may have learned a lot in the git-intro lesson) this
+code review directly into practice when they return to their normal work. 
+
+For novice Git users (who may have learned a lot in the git-intro lesson) this
 lesson is somewhat challenging, but the lesson aims to introduce them to the
 concepts and give them confidence to start using these workflows later when
 they have gained some further experience in working with Git.
