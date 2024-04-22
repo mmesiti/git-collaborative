@@ -1,9 +1,12 @@
 # Collaborative distributed version control @ KIT
 
-We have learned how to make a Git repository for a single person. What
-about sharing?
+_This material was originally developed by [CodeRefinery](https://coderefinery.org/).
+The original material is visible [here](https://coderefinery.github.io/git-collaborative/)._
 
-- Share the folder using email or using some file sharing service:
+
+How can we share work on a repository of files with others on the internet?
+
+- Share an archive of the directory using email or using some file sharing service:
   This would lead to many back and forth emails and would be difficult
   keep all copies synchronized.
 - One person’s repository on the web: allows one person to keep track of
@@ -13,15 +16,18 @@ about sharing?
 - Forks or copies with different owners: anyone can suggest changes, even without
   advance permission. Maintainers approve what they agree with.
 
-Being able to share more easily (going down the above list) is
-*transformative* (easier to change something, that is you are not the sole owner)
+Being able to share more easily (going down the above list) is *transformative*,
 because it allows projects to scale to a new level.
 **This can’t be done without proper tools.**
 
-**In this lesson we will learn how to keep repositories in sync and how to
-work with remote repositories on Git [Forges](https://en.wikipedia.org/wiki/Forge_(software))
-(e.g., GitHub, GitLab and other similar services).** 
-
+Expected learning outcomes: 
+```{objectives}
+1. Be able to collaborate with others on remote repositories 
+   hosted on Git [Forges](https://en.wikipedia.org/wiki/Forge_(software))
+   (e.g., GitHub, GitLab and other similar services).
+2. Know how to fix common issues that people encounter with Git
+   when they deviate from the simplest workflow
+```
 We will discover and exercise 
 the centralized as well as the forking workflows,
 and finally look into how to automate tasks using Git hooks.
@@ -37,7 +43,8 @@ and finally look into how to automate tasks using Git hooks.
 
 During the workshop, 
 you will collaborate in small groups using the same forge. 
-Some of the details might not 
+Some of the details might not apply to the forge you are using, 
+please focus on the general ideas.
 
 
 
