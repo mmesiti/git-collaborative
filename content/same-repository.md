@@ -19,53 +19,82 @@ accepted (or not).
 First, we need to get access to some repository to which we will
 contribute.
 
+1. Form not too large groups (4-5 persons),
+   which have accounts on the same {term}`forge`.
+2. Each group needs to appoint someone who will host the shared
+   repository: the *maintainer*.
+   This is typically the exercise lead (if available).  Everyone else
+   is a *collaborator*.
+3. The **maintainer** (one person per group) generates a new repository
+   called `centralized-workflow-exercise` 
+   on the selected {term}`forge`:
+
+::::::{prereq} How to prepare the repository 
 :::::{tabs}
-  ::::{tab} Part of team/exercise room
-  - Form not too large groups (4-5 persons).
-  - Each group needs to appoint someone who will host the shared
-    GitHub repository: the *maintainer*.
-    This is typically the exercise lead (if available).  Everyone else
-    is a *collaborator*.
-  - The **maintainer** (one person per group) generates a new repository
+  ::::{tab} On github.com
+    The repository can be generated
     from the template <https://github.com/coderefinery/template-centralized-workflow-exercise>
-    called `centralized-workflow-exercise` (There is no need to tick *"Include all branches"* for this exercise):
+    (There is no need to tick *"Include all branches"* for this exercise):
     :::{figure} img/centralized/generate_repo.png
     :alt: Screenshot of generating the exercise repository
     :width: 100%
     :::
-  - Then **everyone in your group** needs their GitHub account to be added as collaborator to the exercise repository:
-    - Collaborators give their GitHub usernames to their chosen maintainer.
-    - Maintainer gives the other group members the newly created GitHub repository URL.
-    - Maintainer adds participants as collaborators to their project (Settings -> Collaborators and teams -> Manage access -> Add people).
   ::::
 
-  ::::{tab} Following on your own
-  The instructors are the **maintainers**.  All watchers are
-  **collaborators**.  This exercise is only possible during our
-  livestream courses.
-  The preparation typically happens already 1-2 days before.
+  ::::{tab} On other forges
+  Unfortunately the mechanism for templates on GitLab 
+  are more restrictive than on GitHub,
+  so they cannot be used for this 
 
-  :::{admonition} If you have not requested access
-  ---
-  class: dropdown
-  ---
-  If you have not yet requested access, could you please [open an
-  issue in this
-  repository](https://github.com/cr-workshop-exercises/access-requests/issues/new/choose).
-  Wait a
-  minute for staff to add you, then wait for the invite email to arrive and
-  accept the invitation from the email and "unwatch" repositories (below).
-  :::
-
-  **Choose only one to work with** (you must have requested access already, see above)
-
-  - Not recorded:
-    <https://github.com/cr-workshop-exercises/centralized-workflow-exercise>
-    (this will not be shown on stream or recorded in our videos, but is public
-    on the internet until it is deleted)
-  - Recorded: <https://github.com/cr-workshop-exercises/centralized-workflow-exercise-recorded> (this will be shown on stream and recorded, **your username and comments may appear in the recorded video on YouTube**)
+  Please follow these steps:
+  - create a directory called `centralized-workflow-exercise` on your computer.
+    ```
+    mkdir centralized-workflow-exercise
+    ```
+  - clone the repository <https://github.com/coderefinery/template-centralized-workflow-exercise>
+    on your computer in the directory you just created:
+    ```
+    git clone https://github.com/coderefinery/template-centralized-workflow-exercise \
+              centralized-workflow-exercise
+    ```
+  - We need to delete the whole history to avoid distractions. 
+    To do this, remove the `.git` directory:
+    ```
+    rm -r centralized-workflow-exercise/.git
+    ```
+  - Re initialize git in the repository:
+    ```
+    cd centralized-workflow-exercise
+    git init
+    ``` 
+  - create an **empty** repository on your preferred forge, called `centralized-workflow-exercise`,
+  - add the remote to your local repository. In this case, 
+    we will use the name of the forge as the name of the remote.
+    If you configured ssh access:
+    ```
+    git remote add <forge-name> git@<forge-name>:<username>/centralized-workflow-exercise
+    ```
+    if you configured access with https:
+    ```
+    git remote add <forge-name> https://<forge-name>/<username>/centralized-workflow-exercise
+    ```
+  - push the main branch there:
+    ```
+    git push <forge-name> main
+    ```
+    
+    # TODO: Review and check
   ::::
+  
 :::::
+
+- Then **everyone in your group** needs their account on the {term}`forge` 
+  to be added as collaborator to the exercise repository:
+  - Collaborators give their GitHub usernames to their chosen maintainer.
+  - Maintainer gives the other group members the newly created repository URL.
+  - Maintainer adds participants as collaborators to their project 
+  (Settings -> Collaborators and teams -> Manage access -> Add people).
+
 
 - **Don't forget to accept the invitation**
   - Check <https://github.com/settings/organizations/>
@@ -93,7 +122,7 @@ contribute.
   :::
 ::::::
 
-:::{exercise} Exercise: Collaborating within the same repository (25 min)
+:::{exercise} Exercise: Collaborating within the same repository (45 min)
 
 **Technical requirements** (from installation instructions):
 - If you create the commits locally: [Being able to authenticate to GitHub](https://coderefinery.github.io/installation/ssh/)

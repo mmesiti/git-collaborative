@@ -12,24 +12,27 @@
 ## Motivation
 
 - Someone has given you access to a repository online and you want to contribute?
-- We will learn how to make a copy and send changes back.
+- We will review how to make a copy and send changes back.
 - Then, we make a "pull request" that allows a review.
-- Once we know how code review works, we will be able to propose changes
-  to repositories of others and review changes submitted by external
-  contributors.
+- Once we know how code review works, we will be able to:
+  - propose changes to repositories of others 
+  - review changes submitted by external contributors.
 
 
-## Commits, branches, repositories, forks, clones
+## Quick recap: Commits, branches, repositories, forks, clones
 
-- {term}`repository`: The project, contains all data and history (commits, branches, tags).
-- {term}`commit`: Snapshot of the project, gets a unique identifier (e.g. `c7f0e8bfc718be04525847fc7ac237f470add76e`).
+- {term}`repository`: A copy of the project, contains all data and history (commits, branches, tags).
+- {term}`commit`: Snapshot of the project, gets a unique identifier 
+  (e.g. `c7f0e8bfc718be04525847fc7ac237f470add76e`).
+  Usually you can use only the first 4 characters and you're fine.
+
 - {term}`branch`: Independent development line. The main development line is often called `main`.
-- {term}`tag`: A pointer to one commit, to be able to refer to it later. Like a [commemorative plaque](https://en.wikipedia.org/wiki/Commemorative_plaque)
+- {term}`tag`: A pointer to one commit, to be able to refer to it later. 
+  Like a "commemorative plaque"
   that you attach to a particular commit (e.g. `phd-printed` or `paper-submitted`).
 - {term}`cloning <clone>`: Copying the whole repository to your laptop - the first time. It is not necessary to download each file one by one.
 - {term}`forking <fork>`: Taking a copy of a repository (which is typically not yours) - your
-  copy (fork) stays on GitHub/GitLab and you can make changes to your copy.
-
+  copy (fork) stays on the forge and you can make changes to your copy.
 
 ## Cloning a repository
 
@@ -49,7 +52,7 @@ Cloning
 
 ## Forking a repository
 
-When a fork is made on GitHub/GitLab a complete copy, of all or selected branches, of the repository is made. The copy will reside under a different account on GitHub/GitLab. Forking of a repository is of high relevance when working with a git repository to which you do not have write access.
+When a fork is made on a {term}`forge` a complete copy, of all or selected branches, of the repository is made. The copy will reside under a different account on a forge. Forking of a repository is of high relevance when working with a git repository to which you do not have write access.
 * In the fork repository commits can be made to the base branch (`main` or `master`), and to other branches.
 * The commits that are made within the branches of the fork repository can be contributed back to the parent repository by means of pull or merge requests.
 
@@ -102,10 +105,12 @@ Importing a repository.
 - We need a mechanism to communicate changes between the repositories.
 - We will **pull** or **fetch** updates **from** remote repositories (we will soon discuss the difference between pull and fetch).
 - We will **push** updates **to** remote repositories.
-- We will learn how to suggest changes within repositories on GitHub and across repositories (**pull request**).
+- We will learn how to suggest changes within repositories on a {term}`forge` and across repositories (**pull request**).
 - Repositories that are forked or cloned do not automatically synchronize themselves:
   We will learn how to update forks (by pulling from the "central" repository).
-- A main difference between cloning a repository and forking a repository is that the former is a general operation for generating copies of a repository to different computers, whereas forking is a particular operation implemented on GitHub/GitLab.
+- A main difference between cloning a repository and forking a repository is that
+  - **cloning** is a general operation for generating copies of a repository to different computers
+  - **forking** is a particular operation implemented on {term}`forges <forge>` (that includes cloning)
 
 ```{figure} img/overview/forkandclone.png
 :alt: Forking and cloning
@@ -114,3 +119,12 @@ Importing a repository.
 
 Forking and cloning
 ```
+
+## Authentication
+
+We recommend using SSH keys, 
+since they will be necessary to connect to other machines
+where the code will run (i.e., HPC systems),
+and it is the most common authentication mechanism for {term}`forges <forge>`.
+
+TODO: discuss other authentication mechanisms (**succinctly**)

@@ -14,6 +14,13 @@ the basics.
 
 :::{glossary}
 
+forge
+   A web-based collaborative software platform for both developing and sharing code 
+   (from [wikipedia](https://en.wikipedia.org/wiki/Forge_(software))).
+   Common example of forges are github.com, gitlab.com, codeberg.org,
+   and self-hosted instances of GitLab or Forgejo.
+   
+
 remote
    Roughly, another git repository on another computer.  A
    repository can be linked to several other remotes.

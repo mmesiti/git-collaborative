@@ -8,7 +8,7 @@
       It should be perfectly fine, but then the audience should be already segmented
       and different "tribes" should sit together.
 - 09:15 - 09:30: [Concepts around collaboration](https://mmesiti.github.io/git-collaborative/remotes/)
-    - Explain terms: Pull, push, clone, fork. Focus on pull and not fetch.
+    - Review (or explain) terms: Pull, push, clone, fork. Focus on pull and not fetch.
     - Focus more on clone and less on generating from templates and importing.
 - 09:30 - 10:30: [Centralized workflow](https://mmesiti.github.io/git-collaborative/centralized/)
     - 09:30 - 09:45: Explain concepts and outcome
@@ -55,6 +55,7 @@ At the beginning of this lesson, learners:
 - Should be comfortable with the command line 
 - Should Be familiar with the usual git workflow (pull/add/commit/push)
 - Probably already have used github or similar
+- **Should have a way to authenticate to the chosen forge**
 
 ## Intended learning outcomes
 
@@ -84,6 +85,7 @@ By the end of this lesson, learners should:
   - when you do not want to add/commit part of the changes you made to a file,
     without having to undo (potentially big) changes in your editor (-p)
   - collaboration between windows and *nix users (line ending issues)
+  - 
 
 
 # Instructor guide - original

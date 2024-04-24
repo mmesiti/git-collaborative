@@ -20,6 +20,10 @@ Being able to share more easily (going down the above list) is *transformative*,
 because it allows projects to scale to a new level.
 **This can’t be done without proper tools.**
 
+
+- {term}`forge`: _a web-based collaborative software platform for both developing and sharing code_ (from [wikipedia](https://en.wikipedia.org/wiki/Forge_(software)))
+
+
 Expected learning outcomes: 
 ```{objectives}
 1. Be able to collaborate with others on remote repositories 
@@ -43,6 +47,7 @@ and finally look into how to automate tasks using Git hooks.
 
 During the workshop, 
 you will collaborate in small groups using the same forge. 
+
 Some of the details might not apply to the forge you are using, 
 please focus on the general ideas.
 
