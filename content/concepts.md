@@ -116,10 +116,11 @@ Importing a repository.
 :alt: Forking and cloning
 :width: 100%
 :class: with-border
-
+  
 Forking and cloning
 ```
 
+(authentication)=
 ## Authentication
 
 We recommend using SSH keys, 
@@ -128,3 +129,13 @@ where the code will run (i.e., HPC systems),
 and it is the most common authentication mechanism for {term}`forges <forge>`.
 
 TODO: discuss other authentication mechanisms (**succinctly**)
+
+If you configured access with an ssh key,
+you might be requested to type its passphrase.
+
+On GitLab, you might need to use either your GitLab password or a 
+Personal Access Token.
+A personal access token can be configured at these pages:
+- [gitlab.com](https://gitlab.com/-/user_settings/personal_access_tokens)
+- [gitlab.kit.edu](https://gitlab.kit.edu/-/user_settings/personal_access_tokens)
+ 

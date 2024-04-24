@@ -41,10 +41,12 @@ contribute.
     :::
   ::::
 
-  ::::{tab} On other forges
+  ::::{tab} On other Forges
   Unfortunately the mechanism for templates on GitLab 
   are more restrictive than on GitHub,
-  so they cannot be used for this 
+  so they cannot be used for this,
+  and on the Forgejo fork of Codeberg 
+  the templating feature is not (yet) available.
 
   Please follow these steps:
   - create a directory called `centralized-workflow-exercise` on your computer.
@@ -74,14 +76,17 @@ contribute.
     ```
     git remote add <forge-name> git@<forge-name>:<username>/centralized-workflow-exercise
     ```
-    if you configured access with https:
+    If you did not, you can try https instead:
     ```
     git remote add <forge-name> https://<forge-name>/<username>/centralized-workflow-exercise
     ```
-  - push the main branch there:
+  - [ ] push the main branch there:
     ```
     git push <forge-name> main
     ```
+    
+    Have a look at the {ref}`Authentication`
+    section if you have troubles here.
     
     # TODO: Review and check
   ::::
