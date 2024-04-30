@@ -1,4 +1,4 @@
-# Collaborating within the same repository
+# Collaborating within the same repository: issues and pull requests
 
 In this episode, we will learn how to collaborate within the same repository.
 We will learn how to cross-reference issues and pull requests, how to review
@@ -21,11 +21,11 @@ contribute.
 
 1. Form not too large groups (4-5 persons),
    which have accounts on the same {term}`forge`.
-2. Each group needs to appoint someone who will host the shared
+1. Each group needs to appoint someone who will host the shared
    repository: the *maintainer*.
    This is typically the exercise lead (if available).  Everyone else
    is a *collaborator*.
-3. The **maintainer** (one person per group) generates a new repository
+1. The **maintainer** (one person per group) generates a new repository
    called `centralized-workflow-exercise` 
    on the selected {term}`forge`:
 
@@ -42,77 +42,111 @@ contribute.
   ::::
 
   ::::{tab} On other Forges
-  Unfortunately the mechanism for templates on GitLab 
-  are more restrictive than on GitHub,
-  so they cannot be used for this,
-  and on the Forgejo fork of Codeberg 
-  the templating feature is not (yet) available.
+  Unfortunately:
+  - Templates on GitLab are more restrictive than on GitHub,
+    so they cannot be used to set up this exercise.
+  - on the Forgejo fork of Codeberg the templating feature is not (yet) available.
 
-  Please follow these steps:
-  - create a directory called `centralized-workflow-exercise` on your computer.
-    ```
-    mkdir centralized-workflow-exercise
-    ```
-  - clone the repository <https://github.com/coderefinery/template-centralized-workflow-exercise>
-    on your computer in the directory you just created:
-    ```
-    git clone https://github.com/coderefinery/template-centralized-workflow-exercise \
-              centralized-workflow-exercise
-    ```
-  - We need to delete the whole history to avoid distractions. 
-    To do this, remove the `.git` directory:
-    ```
-    rm -r centralized-workflow-exercise/.git
-    ```
-  - Re initialize git in the repository:
-    ```
-    cd centralized-workflow-exercise
-    git init
-    ``` 
-  - create an **empty** repository on your preferred forge, called `centralized-workflow-exercise`,
-  - add the remote to your local repository. In this case, 
-    we will use the name of the forge as the name of the remote.
-    If you configured ssh access:
-    ```
-    git remote add <forge-name> git@<forge-name>:<username>/centralized-workflow-exercise
-    ```
-    If you did not, you can try https instead:
-    ```
-    git remote add <forge-name> https://<forge-name>/<username>/centralized-workflow-exercise
-    ```
-  - [ ] push the main branch there:
-    ```
-    git push <forge-name> main
-    ```
+  ::::{Exercise} 
+  In order to achieve an equivalent result, 
+  you need to 
+  - clone the repository <https://github.com/coderefinery/template-centralized-workflow-exercise> locally
+    on your computer
+  - delete the `.git` directory to get rid of all the history
+  - re-initialize the repo in the directory
+  - add the content of the directory and create a first commit
+  - create a properly named repository on the {term}`forge` of your choice
+  - push the newly created repository there.
+
+  :::{solution} Detailed steps
+  Please follow these steps. 
+  The Bash command needed for each step are shown along.
+  1. create a directory called `centralized-workflow-exercise` on your computer.
+     ```console
+     mkdir centralized-workflow-exercise
+     ```
+  1. clone the repository <https://github.com/coderefinery/template-centralized-workflow-exercise>
+     on your computer in the directory you just created:
+     ```console
+     git clone https://github.com/coderefinery/template-centralized-workflow-exercise \
+               centralized-workflow-exercise
+     ```
+  1. We need to delete the whole history to avoid distractions. 
+     To do this, remove the `.git` directory:
+     ```console
+     rm -r centralized-workflow-exercise/.git
+     ```
+  1. Initialize again the repository:
+     ```console
+     cd centralized-workflow-exercise
+     git init
+     ``` 
+  1. Add everything
+     ```console
+     git add
+     ```
+  1. Create a first commit
+     ```console
+     git commit -m "Initial commit"
+     ```
+  1. Log into your preferred forge
+     and create an **empty** and **public** repository 
+     called `centralized-workflow-exercise`.
+  
+     - On GitLab, click the blue "New Project" button on the top right part of the page.
+       Among other things, remember to:
+       - Choose "Blank Project", 
+       - Set the Visibility Level to be Public (this can be changed later)
+       - **untick** the box close to "Initialize repository with a README"
+
+     - On codeberg.org, click the `+` symbol on the top right corner of the page, 
+       and Choose the "New Repository" option.
+       
+
+  1. Add the remote to your local repository. In this case, 
+     we will use the name of the forge as the name of the remote.
+     If you configured ssh access:
+     ```console
+     git remote add <forge-name> git@<forge-name>:<username>/centralized-workflow-exercise
+     ```
+     If not, you can try https instead:
+     ```console
+     git remote add <forge-name> https://<forge-name>/<username>/centralized-workflow-exercise
+     ```
+  1. Push the main branch there:
+     ```console
+     git push <forge-name> main
+     ```
     
-    Have a look at the {ref}`Authentication`
-    section if you have troubles here.
-    
-    # TODO: Review and check
+  Have a look at the {ref}`Authentication`
+  section if you have troubles problems during the push.
+  :::
   ::::
   
 :::::
 
 - Then **everyone in your group** needs their account on the {term}`forge` 
   to be added as collaborator to the exercise repository:
-  - Collaborators give their GitHub usernames to their chosen maintainer.
+  - Collaborators give their usernames on the forge to their chosen maintainer.
   - Maintainer gives the other group members the newly created repository URL.
-  - Maintainer adds participants as collaborators to their project 
-  (Settings -> Collaborators and teams -> Manage access -> Add people).
-
+  - Maintainer adds participants as collaborators to their project.
+    - on github.com: Settings -> Collaborators and teams -> Manage access -> Add people.
+    - on GitLab: Manage -> Members -> Invite Members. 
+      Choose at least the Maintainer role for this exercise
+    - on Codeberg: Settings -> Collaborators 
 
 - **Don't forget to accept the invitation**
-  - Check <https://github.com/settings/organizations/>
+  - Check your personal area on the forge of choice (look for your notifications)
   - Alternatively check the inbox for the email account you registered with
-    GitHub. GitHub emails you an invitation link, but if you don't receive it
+    the forge. 
+    - GitHub emails you an invitation link, but if you don't receive it
     you can go to your GitHub notifications in the top right corner. The
     maintainer can also "copy invite link" and share it within the group.
 
 (unwatch)=
-
 - **Watching and unwatching repositories**
-  - Now that you are a collaborator, you get notified about new issues and pull
-    requests via email.
+  - Now that you are a collaborator, you get notified about new issues 
+    and pull/merge requests via email.
   - If you do not wish this, you can "unwatch" a repository (top of
     the project page).
   - However, we recommend watching repositories you are interested
@@ -132,13 +166,11 @@ contribute.
 **Technical requirements** (from installation instructions):
 - If you create the commits locally: [Being able to authenticate to GitHub](https://coderefinery.github.io/installation/ssh/)
 
-**What is familiar** from the previous workshop days (not repeated here):
-- Cloning a repository ([previous lesson](https://coderefinery.github.io/git-intro/local-workflow/))
-- Creating a branch ([previous lesson](https://coderefinery.github.io/git-intro/commits/))
-- Committing a change on the new branch ([previous lesson](https://coderefinery.github.io/git-intro/commits/))
-- Submit a pull request towards the main branch ([previous lesson](https://coderefinery.github.io/git-intro/merging/))
-
-**What will be new** in this exercise:
+**Skills that you will practice:**
+- Cloning a repository ([CodeRefinery lesson](https://coderefinery.github.io/git-intro/local-workflow/))
+- Creating a branch ([CodeRefinery lesson](https://coderefinery.github.io/git-intro/commits/))
+- Committing a change on the new branch ([CodeRefinery lesson](https://coderefinery.github.io/git-intro/commits/))
+- Submit a pull request towards the main branch ([CodeRefinery lesson](https://coderefinery.github.io/git-intro/merging/))
 - If you create the changes locally, you will need to **push** them to the remote repository.
 - Learning what a protected branch is and how to modify a protected branch: using a pull request.
 - Cross-referencing issues and pull requests.
@@ -166,16 +198,20 @@ contribute.
 
 ### (1) Opening an issue
 
-This is done through the GitHub web interface.  For example, you could
-give the name of the recipe you want to add (so that others don't add
-the same one).  It is the "Issues" tab.
+This is done through the web interface of your preferred {term}`forge`. 
+For example, you could give the name of the recipe you want to add 
+(so that others don't add the same one).  
+- On github.com and codeberg.org: Top row -> the "Issues" tab.
+- On GitLab: Left side -> Plan -> Issues 
 
 ### (2) Create a new branch.
 
-If on GitHub, you can make the branch in the web interface
-({external:doc}`commits`).  If working locally, you need
-{external:doc}`local-workflow`.
+You have two options:
+- make the branch in the web interface (CodeRefinery lesson - refresher, for GitHub: {external:doc}`commits` )
+- If working locally, you need to know {external:doc}`how to work locally <local-workflow>`.
 
+Note: on GitLab, it is possible to create a merge request 
+(and a branch) directly from an issue.
 
 ### (3) Make a change adding the recipe
 
@@ -204,24 +240,20 @@ If you forget to do that in your commit message, you can also reference the issu
 in the pull request description. And instead of `fixes` you can also use `closes` or `resolves`
 or `fix` or `close` or `resolve` (case insensitive).
 
-Here are all the keywords that GitHub recognizes:
-<https://help.github.com/en/articles/closing-issues-using-keywords>
-
 Then observe what happens in the issue once your commit gets merged: it will
 automatically close the issue and create a link between the issue and the
 commit. This is very useful for tracking what changes were made in response to
 which issue and to know from when until when precisely the issue was open.
 
-
-### (4) Push to GitHub as a new branch
+### (4) Push to your forge as a new branch
 
 Covered in {external:doc}`local-workflow`.
 
 Push the branch to the repository. You should end up with a branch
-visible in the GitHub web view.
+visible in the web view of your forge.
 
 This is only necessary if you created the changes locally. If you created the
-changes directly on GitHub, you can skip this step.
+changes directly on the web interface of the forge, you can skip this step.
 
 :::::{tabs}
 ::::{group-tab} VS Code
@@ -245,9 +277,10 @@ origin	git@github.com:user/centralized-workflow-exercise.git (push)
 ```
 
 In this case the remote is called `origin` and refers to the address
-git@github.com:user/centralized-workflow-exercise.git.  Both can be used
-interchangeably. Make sure it points to the right repository, ideally a
-repository that you can write to.
+`git@github.com:user/centralized-workflow-exercise.git`.
+Both can be used interchangeably. 
+Make sure it points to the right repository, 
+ideally a repository that you can write to.
 
 Now that you have a remote, you can push your branch to it:
 ```console
@@ -267,7 +300,7 @@ you can just type `git push` and `git pull` without specifying the branch name
 
 **Troubleshooting**
 
-If you don't have a remote yet, you can add it with (adjust `ADDRESS` to your repository address):
+If you don't have a remote yet, you can add one called `origin` with (adjust `ADDRESS` to your repository address):
 ```console
 $ git remote add origin ADDRESS
 ```
@@ -295,7 +328,7 @@ example, in a [previous lesson](https://coderefinery.github.io/git-intro/merging
 
 ### (6) Reviewing pull requests
 
-You review through the GitHub web interface.
+You review through the web interface.
 
 Checklist for reviewing a pull request:
 - Be kind, on the other side is a human who has put effort into this.
@@ -315,7 +348,7 @@ comments before merging (even if it's just "thanks").  If all is good
 and there's not much else to say, you could merge directly.
 
 
-### (7) Draft pull requests
+### (7) Draft/WIP pull requests
 
 Try to create a draft pull request:
 :::{figure} img/same-repository/draft-pr.png
@@ -332,27 +365,33 @@ for review:
 :alt: Draft pull request cannot be merged
 ::::
 
-Draft pull requests can be useful for:
+Draft/WIP pull requests can be useful for:
 - **Feedback**: You can open a pull request early to get feedback on your work without
   signaling that it is ready to merge.
 - **Information**: They can help communicating to others that a change is coming up and in
   progress.
-
+- **Discussion**: while an issue can be used to discuss a problem, 
+  a draft pull request can be used to show a possible solution 
 
 ### What is a protected branch? And how to modify it?
 
-A protected branch on GitHub or GitLab is a branch that cannot (accidentally)
-deleted or force-pushed to. It is also possible to require that a branch cannot
-be directly pushed to or modified, but that changes must be submitted via a
-pull request.
+A protected branch is a branch that has some restrictions.
+For example, it cannot (accidentally) deleted or force-pushed to. 
+It is also possible to require that a branch cannot
+be directly pushed to or modified, but that changes must be submitted 
+via a pull or merge request
+(that can be accepted or rejected by the owners or maintainers of the repository).
 
-To protect a branch in your own repository, go to "Settings" -> "Branches".
-
+To protect a branch in your own repository:
+- on github.com and codeberg.org: "Settings" -> "Branches". 
+- on GitLab: "Settings" -> Repository -> Branches
 
 
 ### Summary
 
-- We used all the same pieces that we've learned the last two days
-- But we successfully contributed to someone else's project!
-- The pull request allowed us to contribute without changing directly:
-  this is very good when it's not mainly our project.
+- Issue/bug tracking is a very important part of the code development process.
+- We practiced working with issues and pull requests, and how they can be related
+- The pull request allowed us to contribute to a repository
+  without directly changing its content, but ask for permission.
+  This is appropriate in many collaborative development scenarios.
+
