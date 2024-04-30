@@ -24,22 +24,35 @@
 - {term}`repository`: A copy of the project, contains all data and history (commits, branches, tags).
 - {term}`commit`: Snapshot of the project, gets a unique identifier 
   (e.g. `c7f0e8bfc718be04525847fc7ac237f470add76e`).
-  Usually you can use only the first 4 characters and you're fine.
+  Usually you can use be lazy and use only the first 4 characters.
 
 - {term}`branch`: Independent development line. The main development line is often called `main`.
 - {term}`tag`: A pointer to one commit, to be able to refer to it later. 
   Like a "commemorative plaque"
   that you attach to a particular commit (e.g. `phd-printed` or `paper-submitted`).
-- {term}`cloning <clone>`: Copying the whole repository to your laptop - the first time. It is not necessary to download each file one by one.
-- {term}`forking <fork>`: Taking a copy of a repository (which is typically not yours) - your
+- {term}`forge`: A web-based collaborative software platform for both developing and sharing code 
+  (e.g., github.com, gitlab.com, gitlab.kit.edu, bitbucket.org, codeberg.org)
+- {term}`cloning <clone>`: Copying the whole repository - the first time,
+  e.g. downloading it on your computer. It is not necessary to download each file one by one.
+- {term}`forking <fork>`: Cloning a repository (which is typically not yours) on a forge - your
   copy (fork) stays on the forge and you can make changes to your copy.
 
 ## Cloning a repository
 
-In order to make a complete copy a whole repository, the `git clone` command can be used. When cloning, all the files, of all or selected branches, of a repository are copied in one operation. Cloning of a repository is of relevance in a few different situations:
-* Working on your own, cloning is the operation that you can use to create multiple instances of a repository on, for instance, a personal computer, a server, and a supercomputer.
-* The parent repository could be a repository that you or your colleague own. A common use case for cloning is when working together within a smaller team where everyone has read and write access to the same git repository.
-* Alternatively, cloning can be made from a public repository of a code that you would like to use. Perhaps you have no intention to work on the code, but would like to stay in tune with the latest developments, also in-between releases of new versions of the code.
+In order to make a copy a repository (a **clone**), 
+the `git clone` command can be used. 
+Cloning of a repository is of relevance in a few different situations:
+* Working on your own, cloning is the way to copy a repository on, 
+  e.g., a personal computer, a server, and a supercomputer.
+* The original repository could be a repository that you or your colleague own. 
+  A common use case for cloning is when working together 
+  within a smaller team where everyone has read and write access to the same git repository.
+* Alternatively, cloning can be made from a public repository of a code 
+  that you would like to use. 
+  Perhaps you have no intention to work on the code, 
+  but would like to stay in tune with the latest developments, 
+  also in-between releases of new versions of the code.
+* Your work is not visible to others, because it is on your computer.
 
 ```{figure} img/overview/clone.png
 :alt: Cloning
@@ -52,9 +65,12 @@ Cloning
 
 ## Forking a repository
 
-When a fork is made on a {term}`forge` a complete copy, of all or selected branches, of the repository is made. The copy will reside under a different account on a forge. Forking of a repository is of high relevance when working with a git repository to which you do not have write access.
-* In the fork repository commits can be made to the base branch (`main` or `master`), and to other branches.
-* The commits that are made within the branches of the fork repository can be contributed back to the parent repository by means of pull or merge requests.
+**Forking** a repository on a {term}`forge` creates a clone 
+that reside under a different account on the same forge (a **fork**).  
+It is typically done to work on a git repository you cannot write to.
+* Your work is visible to others, because it is on the web
+* commits in the fork can be made to any branch (including `main` or `master`) 
+* The commits that are made within the branches of the fork repository can be contributed back to the parent repository by means of pull (or merge) requests.
 
 ```{figure} img/overview/fork.png
 :alt: Forking
@@ -64,34 +80,35 @@ When a fork is made on a {term}`forge` a complete copy, of all or selected branc
 Forking
 ```
 
+```{exercise}
+What is the difference between forking and then cloning (your fork, to your computer) vs 
+cloning (to your computer) and then pushing to a brand new repository?
+:::{solution}
+  1. Forking on a forge and then cloning creates links:
+     - from your fork to the original repository;
+     - from clone to your fork.
+
+  1. When cloning and then pushing to a new repository, 
+     you will create links:
+     - from your clone to the original repository;
+     - from your clone to the new repository.
+
+     Your repository on the forge will not have a link to the original repository
+     and will not be listed as a fork of the original repository.
+:::
+```
 
 ## Generating from templates and importing
 
 There are two more ways to create "copies" of repositories into your user space:
-- A repository can be marked as **template** and new repositories can be
-  **generated** from it, like using a cookie-cutter.
-  The newly created repository will start with a new history, only one commit, and not
-  inherit the history of the template.
-
-```{figure} img/overview/generate.png
-:alt: Generating from a template
-:width: 100%
-:class: with-border
-
-Generating from a template.
-```
-
+- A repository can be marked as **template** 
+  and new repositories can be **generated** from it
+  like using a cookie-cutter.
+  The newly created repository will start with a new history.
 - You can **import** a repository from another hosting service or web address.
-  This will preserve the history of the imported project.
+  This will preserve the history of the imported project
+  and features like Wikis, issues and the like.
 
-```{figure} img/overview/import.png
-:alt: Importing a repository
-:width: 100%
-:class: with-border
-
-Importing a repository.
-```
----
 
 ```{discussion}
 - Visit one of the repositories/projects that you have used recently and try to find out
