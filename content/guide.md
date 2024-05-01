@@ -7,16 +7,18 @@
     - Many people might want to use gitlab.kit.edu for this (or something else).
       It should be perfectly fine, but then the audience should be already segmented
       and different "tribes" should sit together.
-- 09:15 - 09:30: [Concepts around collaboration](https://mmesiti.github.io/git-collaborative/remotes/)
+- 09:15 - 09:30: [Concepts around collaboration](https://mmesiti.github.io/git-collaborative/concepts/)
     - Review (or explain) terms: Pull, push, clone, fork. Focus on pull and not fetch.
     - Focus more on clone and less on generating from templates and importing.
-- 09:30 - 10:30: [Centralized workflow](https://mmesiti.github.io/git-collaborative/centralized/)
-    - 09:30 - 09:45: Explain concepts and outcome
-    - 09:45 - 10:30: [Exercise and walkthrough](https://mmesiti.github.io/git-collaborative/centralized/#exercise-preparation)
-- 10:30 - 10:45: Holy Break
-- 10:45 - 11:45: [Distributed version control and forking workflow](https://coderefinery.github.io/git-collaborative/distributed/)
-    - 10:45 - 11:00: Explain concepts and outcome
-    - 11:00 - 11:45: [Exercise and walkthrough](https://mmesiti.github.io/git-collaborative/distributed/#exercise-preparation)
+- 09:30 - 10:00: [Branching and .git](https://mmesiti.github.io/git-intro/under-the-hood/)
+- 10:00 - 10:10: Holy Break
+- 10:10 - 11:00: [Centralized workflow](https://mmesiti.github.io/git-collaborative/same-repository/)
+    - 10:10 - 10:20: Explain concepts and outcome
+    - 10:30 - 11:00: [Exercise and walkthrough](https://mmesiti.github.io/git-collaborative/same-repository/#exercise-preparation)
+- 11:00 - 11:10: Holy Break
+- 11:10 - 12:00: [Distributed version control and forking workflow](https://coderefinery.github.io/git-collaborative/distributed/)
+    - 11:10 - 11:20: Explain concepts and outcome
+    - 11:20 - 12:00: [Exercise and walkthrough](https://mmesiti.github.io/git-collaborative/distributed/#exercise-preparation)
 - 11:45 - 12:00: Holy Break 
 - 13:10 - 13:30: [How to contribute changes to somebody else’s project](https://coderefinery.github.io/git-collaborative/contributing/) and Q&A
 
@@ -33,6 +35,17 @@ I would not let attendees work on their own on an exercise
 for 30 minutes without feedback,
 so I changed the times of the exercise lessons 
 to also include instructor feedback. 
+
+Another change is that I try not to be {term}`forge`-specific.
+One reason is that the expected audience
+typically has access to GitLab instances,
+and also someone might not like Microsoft,
+so I am adding codeberg.org as an alternative.
+Another reason is that actually the features of every forge
+typically evolve over time. 
+Looking at a variety of forges at a single time point
+might give an idea of the distribution of features 
+of a single forge at different points in time.
 
 ### Audience intended for this course
 

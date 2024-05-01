@@ -58,6 +58,7 @@ please focus on the general ideas.
 :caption: Core lesson
 
 concepts.md
+branches-and-internals.md
 same-repository.md
 code-review.md
 forking-workflow.md
