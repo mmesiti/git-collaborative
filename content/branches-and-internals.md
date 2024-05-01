@@ -20,7 +20,9 @@ When usually working with Git,
 **you will never need to go inside .git**,
 but in this exercise we will
 in order to learn about 
-- how branches are implemented in Git.
+- how branches are implemented in Git,
+  and how to use them freely
+- how you can avoid losing data with Git.
 
 ::::{prereq}
 For this exercise create a new repository and commit a couple of changes.
@@ -210,6 +212,46 @@ What would have happened if we changed HEAD to point to a branch
 that does not point to the same commit 
 as the one we were on before?
 ```
+
+## Deleting branches (also by mistake - and undoing it)
+
+Let us add some work on the branch `idea-3`, and create some additional commits.
+
+Let's assume we want to remove the branch `idea-2`,
+to tidy up our repository.
+
+We first switch to `main`, then try to remove the useless branch
+```console
+$ git switch main
+$ git branch -d idea-3
+error: The branch 'idea-3' is not fully merged.
+```
+We are sure we want to delete, so we use the `-D` option.
+```console
+$ git branch -D idea-3
+```
+We then get distracted and go doing something else.
+```console
+$ clear
+```
+Wait a moment! We deleted the wrong branch. Is our work lost?
+Using
+```console
+$ git reflog
+```
+we can see all the last commits pointed at by HEAD,
+and among them there will be the one which was referenced by `idea-3`
+before we deleted it.
+We can check it out and recreate our branch. 
+
+
+TODO:
+- DONE Defining different lines of work: Creating branches and committing on them
+- DONE Jumping between branches
+- DONE [[Which branches and commit have you worked on?]] : reflog
+- [[Temporary work]]: Stashing
+- Complicated log command: [[using long complicated commands efficiently]] (aliases)
+
 
 
 ## Demonstration: If you add it, you don't lose it (for a while)
