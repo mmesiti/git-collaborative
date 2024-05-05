@@ -61,8 +61,8 @@ In the `objects` directory we find, among others, 3 kinds of objects:
 `commit` objects contain information about the author and the commit message,
 and every `commit` object references a single `tree` object.
 
-All objects are referenced by a SHA-1 hash (a 40-character hexadecimal string)
-that is computed on their content. 
+**All objects are named as the SHA-1 hash (a 40-character hexadecimal string)
+that is computed on their content.** 
 
 
 ```{figure} img/commit-and-tree.png
@@ -72,8 +72,7 @@ that is computed on their content.
 States of a Git repository. Image from the [Pro Git book](https://git-scm.com/book/). License CC BY 3.0.
 ```
 
-
-```{discussion} Changes and their effect
+```{discussion} Changes and their effect: files and commits
 Refer to the figure above, and discuss:
 which SHA-1 hashes would change in the diagram if:
 
@@ -101,7 +100,7 @@ A commit and its parents. Image from the [Pro Git book](https://git-scm.com/book
 ```
 
 
-```{discussion} Changes and their effect - 2
+```{discussion} Changes and their effect: changing history
 Refer to the figure above, and discuss:
 which SHA-1 hashes would change in the diagram if:
 - The the 3rd commit were changed
@@ -360,12 +359,12 @@ $ git log --oneline --graph --all
 ```
 It is inconvenient to type such a long message every time.
 Git allows us to configure an alias for it,
-in this case it will be called `logs`:
+in this case it will be called `graph`:
 ```console
-$ git config --global alias.logs "log --all --oneline --graph"
+$ git config --global alias.graph "log --all --oneline --graph"
 ```
 After this configuration,
-we will be able to use `logs` as a git command
+we will be able to use `graph` as a git command
 with the same effect as the original, longer command.
 
 ## Demonstration: If you add it, you don't lose it (for a while)

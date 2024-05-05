@@ -36,10 +36,12 @@ for 30 minutes without feedback,
 so I changed the times of the exercise lessons 
 to also include instructor feedback. 
 
+
 Another change is that I try not to be {term}`forge`-specific.
 One reason is that the expected audience
 typically has access to GitLab instances,
-and also someone might not like Microsoft,
+and also someone might be concerned 
+about handing all their code to a Microsoft-owned platform,
 so I am adding codeberg.org as an alternative.
 Another reason is that actually the features of every forge
 typically evolve over time. 
