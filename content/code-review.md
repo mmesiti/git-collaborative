@@ -1,11 +1,21 @@
-# Practicing code review
+# Code review demo
 
-In this episode we will practice the code review process. We will learn how to
-ask for changes in a pull request, how to suggest a change in a pull request,
-and how to modify a pull request.
+Here we will practice the code review process.
+We will learn:
+- how to ask for changes in a pull request;
+- how to suggest a change in a pull request;
+- how to modify a pull request.
 
-This will enable research groups to work more collaboratively and to not only
-improve the code quality but also to learn from each other.
+This will enable research groups to work more collaboratively,
+which should help to
+- improve the code quality 
+- learn from each other.
+
+Note that *pair programming* 
+is usually seen as possible alternative
+to code review.  
+Compared to the practice of code review,
+it has its own pros and cons.
 
 
 ## Exercise
@@ -55,46 +65,40 @@ From here on out, we don't give detailed steps to the solution.  You
 need to combine what you know, and the extra info below, in order to
 solve the above.
 
-### How to ask for changes in a pull request
+### Asking for changes in a pull request: 2 ways
 
-Technically, there are at least two common ways to ask for changes in a pull
-request.
+1. Either in the comment field of the pull request:
+   :::{figure} img/code-review/comment.png
+   :width: 60%
+   :class: with-border
+   :alt: Screenshot of a pull request comment field
+   ::::
 
-Either in the comment field of the pull request:
-:::{figure} img/code-review/comment.png
-:width: 60%
-:class: with-border
-:alt: Screenshot of a pull request comment field
-::::
-
-Or by using the "Review changes":
-:::{figure} img/code-review/files-changed.png
-:width: 100%
-:class: with-border
-:alt: Screenshot of a pull request navigating to the "Review changes" tab
-::::
+2. Or by using the "Review changes":
+   :::{figure} img/code-review/files-changed.png
+   :width: 100%
+   :class: with-border
+   :alt: Screenshot of a pull request navigating to the "Review changes" tab
+   ::::
 
 And always please be kind and constructive in your comments. Remember that the
 goal is not gate-keeping but **collaborative learning**.
 
 
-### How to suggest a change in a pull request as a reviewer
+### Suggest a change in a pull request as a reviewer
 
-If you see a very small problem that is easy to fix, you can suggest a change
-as a reviewer.
-
-Instead of asking the submitter to tiny problem, you can suggest a change by
-clicking on the plus sign next to the line number in the "Files changed" tab:
+If you see a very small problem that is easy to fix, 
+add a comment 
+by clicking on the sign next to the line number in the tab that shows the changes:
 :::{figure} img/code-review/leave-comment.png
 :width: 100%
 :class: with-border
-:alt: Screenshot of leaving a comment to a line in a pull request
+:alt: Screenshot of leaving a comment to a line in a pull request (github.com)
 ::::
 
 Here you can comment on specific lines or even line ranges.
 
-But now the interesting part is to click on the "Add a suggestion" symbol (the
-one that looks like plus and minus). Now you can fix the tiny problem (in this
+Click on the "Add suggestion/Insert suggestion" symbol. Now you can fix the tiny problem (in this
 case a typo) and then click on the "Add single comment" button:
 :::{figure} img/code-review/add-suggestion.png
 :width: 60%

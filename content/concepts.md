@@ -18,25 +18,6 @@
   - propose changes to repositories of others 
   - review changes submitted by external contributors.
 
-
-## Quick recap: Commits, branches, repositories, forks, clones
-
-- {term}`repository`: A copy of the project, contains all data and history (commits, branches, tags).
-- {term}`commit`: Snapshot of the project, gets a unique identifier 
-  (e.g. `c7f0e8bfc718be04525847fc7ac237f470add76e`).
-  Usually you can use be lazy and use only the first 4 characters.
-
-- {term}`branch`: Independent development line. The main development line is often called `main`.
-- {term}`tag`: A pointer to one commit, to be able to refer to it later. 
-  Like a "commemorative plaque"
-  that you attach to a particular commit (e.g. `phd-printed` or `paper-submitted`).
-- {term}`forge`: A web-based collaborative software platform for both developing and sharing code 
-  (e.g., github.com, gitlab.com, gitlab.kit.edu, bitbucket.org, codeberg.org)
-- {term}`cloning <clone>`: Copying the whole repository - the first time,
-  e.g. downloading it on your computer. It is not necessary to download each file one by one.
-- {term}`forking <fork>`: Cloning a repository (which is typically not yours) on a forge - your
-  copy (fork) stays on the forge and you can make changes to your copy.
-
 ## Cloning a repository
 
 In order to make a copy a repository (a **clone**), 

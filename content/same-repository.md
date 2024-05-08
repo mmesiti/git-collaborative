@@ -41,12 +41,13 @@ contribute.
     :::
   ::::
 
-  ::::{tab} On other Forges
+  ::::{tab} On other Forges: Clone and Push to new repository
   Unfortunately:
   - Templates on GitLab are more restrictive than on GitHub,
     so they cannot be used to set up this exercise.
   - on the Forgejo fork of Codeberg the templating feature is not (yet) available.
 
+ 
   ::::{Exercise} 
   In order to achieve an equivalent result, 
   you need to 

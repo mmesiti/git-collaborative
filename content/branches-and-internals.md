@@ -10,7 +10,7 @@
 - 15 min exercise
 ```
 
-A {term}`branch` is seen as an independent line of work.
+A {term}`branch` represents independent line of work.
 Git internal structure makes it very easy to implement branches 
 as a thin layer of abstraction on its *Object database*.
 
@@ -62,7 +62,8 @@ In the `objects` directory we find, among others, 3 kinds of objects:
 and every `commit` object references a single `tree` object.
 
 **All objects are named as the SHA-1 hash (a 40-character hexadecimal string)
-that is computed on their content.** 
+that is computed on their content.**  
+This means that all objects are *immutable*.
 
 
 ```{figure} img/commit-and-tree.png
@@ -132,7 +133,7 @@ Then explore the `tree` object, then the `file` object, etc. recursively using t
 ## Demonstration: experimenting with branches
 
 
-**Branches are just pointers to commits**.
+**Branches are pointers to commits** that move over time.
 
 We are starting from the `main` branch and create an `idea` branch:
 
@@ -142,7 +143,7 @@ $ git status
 On branch main
 nothing to commit, working tree clean
 $ git branch idea
-$ git switch idea  
+$ git switch idea
 Switched to a new branch 'idea'
 ```
 
@@ -160,12 +161,10 @@ $ git branch
 Let us lift the hood and create few branches "manually", 
 without using the `git branch` command.
 
-Let us finally visit the `refs` directory:
+Let us have a look at the `refs` directory:
 
 ```console
-$ cd .git
-$ cd refs/heads
-$ ls -l
+$ ls -l .git/refs/heads
 
 .rw-r--r-- 41 user 25 Aug 15:54 idea
 .rw-r--r-- 41 user 25 Aug 15:52 main
@@ -174,21 +173,20 @@ $ ls -l
 Let us check what the `idea` file looks like
 (do not worry if the hash is different):
 ```console
-$ cat idea
+$ cat .git/ref/heads/idea
 
 045e3db14740c60684d745e5fb891ae71e335611
 ```
-
+  * [ ] 
 Now let us replicate this file:
 ```console
-$ cp idea idea-2
-$ cp idea idea-3
+$ cp .git/refs/heads/idea .git/refs/heads/idea-2
+$ cp .git/refs/heads/idea .git/refs/heads/idea-3
 ```
 
 Let us go up two levels and inspect the file `HEAD`:
 ```console
-$ cd ../..
-$ cat HEAD
+$ cat .git/HEAD
 
 ref: refs/heads/idea
 ```
@@ -196,11 +194,6 @@ ref: refs/heads/idea
 Let us open this file and change it to:
 ```
 ref: refs/heads/idea-3
-```
-
-Let us go back to the working area:
-```console
-$ cd ..
 ```
 
 Now - on which branch are we?
@@ -219,9 +212,33 @@ that does not point to the same commit
 as the one we were on before?
 ```
 
-```{discussion} Branches on different repositories
+:::::{exercise} Branches on different repositories
 How are branches on different repositories related to each other?
+
+::::{solution}
+After creating a branch, one can use the `--set-upstream-to` options
+```{console}
+$ git branch <new-branch>
+$ git branch <new-branch> --set-upstream-to=<remote>/<branch>
 ```
+to set the default *upstream* branch.
+
+When pushing, it is possible to use the verbose command:
+```{console}
+$ git push <repository> <local-branch>:<remote-branch>
+```
+Typically `<local-branch>` and `<remote-branch>` are the same,
+and `:<remote-branch>` is omitted it is assumed to be equal to `<local-branch>`.
+
+`git push` can also use the default upstream branch
+if configured correctly:
+```{console}
+$ git config --local push.default upstream
+```
+
+But typically there is no need for such complex setups.
+::::
+:::::
 
 ## Deleting branches (also by mistake - and undoing it)
 

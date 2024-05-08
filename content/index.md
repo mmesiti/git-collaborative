@@ -1,7 +1,8 @@
 # Collaborative distributed version control @ KIT
 
 _This material was originally developed by [CodeRefinery](https://coderefinery.org/).
-The original material is visible [here](https://coderefinery.github.io/git-collaborative/)._
+The original material is visible [here](https://coderefinery.github.io/git-collaborative/)
+and [here](https://coderefinery.github.io/git-intro/)._
 
 
 How can we share work on a repository of files with others on the internet?
@@ -34,7 +35,6 @@ Expected learning outcomes:
 ```
 We will discover and exercise 
 the centralized as well as the forking workflows,
-and finally look into how to automate tasks using Git hooks.
 
 ```{prereq}
 1. Basic understanding of Git.
@@ -57,6 +57,7 @@ please focus on the general ideas.
 :maxdepth: 1
 :caption: Core lesson
 
+commits.md
 concepts.md
 branches-and-internals.md
 same-repository.md
