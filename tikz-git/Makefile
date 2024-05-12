@@ -1,3 +1,3 @@
-presentation.pdf: presentation.tex Makefile
-	pdflatex presentation.tex < /dev/null && pdflatex presentation.tex 
+git-states.pdf: git-states.tex Makefile
+	pdflatex git-states.tex < /dev/null && pdflatex git-states.tex 
 
