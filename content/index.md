@@ -63,6 +63,7 @@ branches-and-internals.md
 same-repository.md
 code-review.md
 forking-workflow.md
+interrupted.md
 ```
 
 ```{toctree}

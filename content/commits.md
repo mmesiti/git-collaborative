@@ -49,7 +49,6 @@ can merge them together easily.  Image created using <https://gopherize.me/>
 ([inspiration](https://twitter.com/jay_gee/status/703360688618536960)).
 :::
 
-
 ## Exercise
 
 ::::::{prereq} How to prepare the repository 
@@ -58,7 +57,7 @@ can merge them together easily.  Image created using <https://gopherize.me/>
   1. Go to the repository view on GitHub <https://github.com/coderefinery/recipe-book>
   1. First, on GitHub, click the button that says "Fork".  It is towards
      the top-right of the screen:
-     :::{figure} img/browsing/forking.png
+     :::{figure} img/recap/forking.png
      :alt: Screenshot on GitHub before clicking on "Fork"
      :width: 80%
      :class: with-border
