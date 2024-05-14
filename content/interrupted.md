@@ -12,6 +12,7 @@
 ```{keypoints}
 - There is almost never reason to clone a fresh copy to complete a task that
   you have in mind.
+- Sometimes Git suggests to "stash your changes". What is this about?
 ```
 
 

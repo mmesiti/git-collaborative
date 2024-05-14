@@ -52,12 +52,12 @@ Some of the details might not apply to the forge you are using,
 please focus on the general ideas.
 
 
-
 ```{toctree}
 :maxdepth: 1
 :caption: Core lesson
 
 commits.md
+archaeology.md
 concepts.md
 branches-and-internals.md
 same-repository.md

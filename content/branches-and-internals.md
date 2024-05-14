@@ -217,14 +217,14 @@ How are branches on different repositories related to each other?
 
 ::::{solution}
 After creating a branch, one can use the `--set-upstream-to` options
-```{console}
+```console
 $ git branch <new-branch>
 $ git branch <new-branch> --set-upstream-to=<remote>/<branch>
 ```
 to set the default *upstream* branch.
 
 When pushing, it is possible to use the verbose command:
-```{console}
+```console
 $ git push <repository> <local-branch>:<remote-branch>
 ```
 Typically `<local-branch>` and `<remote-branch>` are the same,
@@ -232,7 +232,7 @@ and `:<remote-branch>` is omitted it is assumed to be equal to `<local-branch>`.
 
 `git push` can also use the default upstream branch
 if configured correctly:
-```{console}
+```console
 $ git config --local push.default upstream
 ```
 
