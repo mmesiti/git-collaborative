@@ -18,7 +18,8 @@ We will record changes in two ways:
   at a certain point in time,
   gets a unique identifier 
   (called a {term}`hash`, e.g. `c7f0e8bfc718be04525847fc7ac237f470add76e`).
-  Usually you can use be lazy and use only the first 4 characters.
+  Usually you can use be lazy and use only the first 4 characters
+  wherever a commit hash is needed.
 
 - {term}`branch`: Independent development line. The main development line is often called `main`.
 - {term}`tag`: A pointer to one commit, to be able to refer to it later. 
@@ -49,7 +50,7 @@ can merge them together easily.  Image created using <https://gopherize.me/>
 ([inspiration](https://twitter.com/jay_gee/status/703360688618536960)).
 :::
 
-## Exercise
+## Exercise: Practice creating commits and branches 
 
 ::::::{prereq} How to prepare the repository 
 :::::{tabs}
@@ -135,7 +136,10 @@ can merge them together easily.  Image created using <https://gopherize.me/>
 
 
 
-We offer **three different paths** of how to do this exercise.
+We offer **three different paths** of how to do this exercise: 
+- on GitHub
+- using VSCode
+- using the command line 
 
 :::{exercise} Exercise: Practice creating commits and branches (20 min)
 1. Make sure that you now work **on your fork** of the recipe-book
@@ -524,6 +528,11 @@ Creating a tag:
 ```console
 $ git tag -a v1.0 -m "New manuscript version of my recipe for the pre-print"
 ```
+If this repository has a remote called `origin`,
+you can publish the tag there:
+```console
+$ git push origin v1.0 
+```
 ::::
 :::::
 
@@ -541,6 +550,3 @@ their differences.
   once, and you don't want them to interfere with each other.
 - Tags are useful to mark a specific commit as important, for example a
   release version.
-- In Git, commits form a so-called "graph". Branches are tags in Git function
-  like sticky notes that stick to specific commits. What this means for us is
-  that it does not cost any significant disk space to create new branches.
