@@ -1,8 +1,7 @@
 # Git internals: Objects and Branches
 
 ```{objectives}
-- Verify that branches are pointers to commits, easy to create and remove
-- 
+- Understand what is easy to do with git, and what is not easy
 ```
 
 ```{instructor-note}
@@ -132,7 +131,6 @@ Then explore the `tree` object, then the `file` object, etc. recursively using t
 
 ## Demonstration: experimenting with branches
 
-
 **Branches are pointers to commits** that move over time.
 
 We are starting from the `main` branch and create an `idea` branch:
@@ -177,7 +175,6 @@ $ cat .git/ref/heads/idea
 
 045e3db14740c60684d745e5fb891ae71e335611
 ```
-  * [ ] 
 Now let us replicate this file:
 ```console
 $ cp .git/refs/heads/idea .git/refs/heads/idea-2
@@ -207,10 +204,19 @@ $ git branch
 ```
 
 ```{exercise} 
+By changing the content of `.git/HEAD`
+we have manually "switched" 
+from a branch 
+to another one 
+that actually points 
+to the same commit.
+
 What would have happened if we changed HEAD to point to a branch 
 that does not point to the same commit 
 as the one we were on before?
+What would we see with `git status`?
 ```
+ 
 
 :::::{exercise} Branches on different repositories
 How are branches on different repositories related to each other?
@@ -270,6 +276,19 @@ we can see all the last commits pointed at by HEAD,
 and among them there will be the one which was referenced by `idea-3`
 before we deleted it.
 We can check it out and recreate our branch. 
+
+## Moving branches back to where they pointed
+
+When using many commands,
+we move forward the branch we are on.
+
+We can make a branch point back to where it pointed before
+by switching to it and using `git reset --soft`.
+
+If we do not exactly remember where it pointed,
+we can use `git reflog <branch name>`
+to get an idea of where it was moved.
+
 
 
 
