@@ -43,9 +43,9 @@ Have you used `git worktree`?
 The **stash** is the first and easiest place to temporarily "stash"
 things.
 
-- `git stash` will put working directory and staging area changes
+- `git stash push` will put working directory and staging area changes
   away.  Your code will be same as last commit.
-- `git stash pop` will return to the state you were before. Can give it a list.
+- `git stash pop` will return to the state you were before. 
 - `git stash list` will list the current stashes.
 - `git stash push -m "message"` is like the first, but will give it a message.
   Useful if it might last a while.
@@ -85,6 +85,40 @@ when resolving conflicts between two branches.
 7: It shows an additional commit hash with `refs/stash`.
 ```
 ````
+
+```{exercise} Stashing all
+Sometimes we want to stash 
+files that are not yet tracked by git 
+(i.e., have not been `add`ed).
+How would we do that?
+Look at the man page using `git help stash`.
+:::{solution}
+   By passing the option `-a`, 
+   we are telling `git stash` 
+   to take every file in our working tree,
+   including untracked and ignored files.
+:::
+```
+
+```{exercise} Comments
+The option `-m` to add a message is optional. Why use it?
+:::{solution}
+   By looking at the output of `git stash list`,
+   it will be much easier to determine which stash we are interested in.
+:::
+```
+
+```{exercise} Stash vs commit
+In what sense are stashes similar to commits?
+:::{solution}
+    Stashing is roughly equivalent to
+    ```console
+    git switch -c tempbranch; git add -u; git commit -m 'temp commit'}).
+    ```
+    In particular, stashes are identified as `commit` objects in the object database,
+    and they are referenced by `refs/stash` and the reflog of the "stash" reference.
+:::
+
 
 
 ## Option 2: Create branches
