@@ -54,24 +54,16 @@ please focus on the general ideas.
 
 ```{toctree}
 :maxdepth: 1
-:caption: Core lesson
+:caption: Episodes
 
 commits.md
 archaeology.md
-concepts.md
 branches-and-internals.md
+concepts.md
 same-repository.md
 code-review.md
 forking-workflow.md
 interrupted.md
-```
-
-```{toctree}
-:maxdepth: 1
-:caption: Optional episodes
-
-hooks.md
-bare-repos.md
 ```
 
 ```{toctree}
