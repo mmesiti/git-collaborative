@@ -356,8 +356,7 @@ View → Terminal will open a terminal at bottom.  This is a normal command line
 
 ::::{group-tab} Command line
 ```console
-$ git graph
-$ git log --graph --oneline --decorate --all  # If you didn't define git graph yet.
+$ git log --graph --oneline --decorate --all  
 ```
 
 In my case I got:

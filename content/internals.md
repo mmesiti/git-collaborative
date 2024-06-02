@@ -130,24 +130,6 @@ Then explore the `tree` object, then the `file` object, etc. recursively using t
 
 :::
 
-## Using complex commands conveniently: aliases in the git configuration
-
-When working with branches on the command line, 
-it is useful to look at the log with the following command
-(or something similar):
-```console
-$ git log --oneline --graph --all
-```
-It is inconvenient to type such a long message every time.
-Git allows us to configure an alias for it,
-in this case it will be called `graph`:
-```console
-$ git config --global alias.graph "log --all --oneline --graph"
-```
-After this configuration,
-we will be able to use `graph` as a git command
-with the same effect as the original, longer command.
-
 ## Demo: If you add it, you don't lose it (for a while)
 
 A common way to (apparently) lose work
