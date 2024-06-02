@@ -69,6 +69,22 @@ bare repository
    directory: there are no files actually checked out.  Directory names
    usually like `something.git`
 
+working tree
+   The directory where the files of your project live,
+   excluding the `.git` subdirectory.
+   It represents all that non git-aware applications can interact with,
+   and it exists independently of git,
+   but it can be manipulated by git
+
+index
+   Also called sometimes "staging area".
+   A version of a file is added to it with `git add`.
+
+object
+  A git object is one of 4 kinds: a commit (representing a commit or a stash),
+  a tree (representing a directory), a blob (representing a file)
+  or a tag.
+
 :::
 
 

@@ -1,0 +1,102 @@
+# Beyond add and commit
+
+Most git users will typically use `pull`, `add`, `commit` and `push`
+and these 4 commands will perform >95% of the operations needed.
+
+To be in control of Git,
+it is beneficial to know at least 
+how to undo these commands.
+
+:::{objectives}
+* Undo `git add`
+* Undo `git commit`
+* Understand that there are many states, and the complexity that this entails
+:::
+
+Git offers you **many versions** of any file in the repository:
+- the one in the {term}`working tree`
+- the one in the {term}`index` (the index is also called "staging area")
+- as many versions as there are commits.
+
+The committed versions cannot be changed,
+but new commits can be created,
+and the versions in the {term}`working tree` and in the {term}`index`
+can be overwritten.
+
+As a result, there can be many commands 
+that are used to copy one version of a file into another.
+
+For a step by step introduction of the commands,
+see this [Beamer presentation](../tikz-git/git-states.pdf).
+
+:::{figure} img/git-states/git-trinity.png
+:alt: The states of a file in Git and the commands to copy version between them
+:width: 100%
+
+The different versions of a file in Git 
+and the commands that can be used to copy
+them into each other.
+
+:::
+
+## Patching: Partial commands
+
+Most of the commands listed above 
+accept a `--patch` (or `-p`) option
+that allows to interactively select 
+the parts (*hunks*) of a file that will be copied,
+very useful when some additional finesse is required.
+
+## Undoing `git commit`
+
+The `commit` command cannot actually be undone *completely*,
+since it created another immutable {term}`object` in the git repository.
+
+**Practically**, there are 3 different effects of `git commit`
+that we might want to undo:
+
+:::{list-table} Undoing `git commit`
+* - Problem
+  - Solution
+  - Comments
+
+* - Change to the files  
+    in the repository
+  - `git revert <commit>`
+  - Creates another commit   
+    with the opposite changes
+* - Wrong commit message
+  - `git commit --amend`
+  - You can change the commit message.  
+    Dont' do it after `git push`
+* - Branch has moved  
+    to new commit
+  - `git reset --soft <last-good-commit>`
+  - Moves the current branch  
+    to the chosen commit.  
+    Dont' do it after `push`
+:::
+
+
+
+:::{callout} When is `git reset` dangerous?
+If you have already published your changes with `git push`
+and someone has already seen them,
+using `git reset` would be **very rude**!  
+Why?  
+It would force them to do 'weird things' 
+like the ones we are discussing here).
+In that case, it is just safer to use `git revert`!
+:::
+
+
+:::{keypoints} Take-home message
+- To undo `git add`, 
+  typically you need to copy the content of `HEAD`
+  into the index. 
+  `git restore --staged <file-path>` or `git reset` 
+  will do it.
+- To undo a commit, typically you want to use `git revert`.
+  If you have not used `git push` yet,
+  you have fancier options.
+:::

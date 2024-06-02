@@ -79,9 +79,12 @@ especially when collaborating with other people.
 :caption: Episodes
 
 commits.md
+internals.md
+branches.md
 archaeology.md
-branches-and-internals.md
-concepts.md
+git-states.md
+collaboration-fear.md
+collaboration-concepts.md
 same-repository.md
 code-review.md
 forking-workflow.md
