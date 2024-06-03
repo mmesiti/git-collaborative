@@ -22,7 +22,8 @@ the collaboration practices are
 what really make a difference.
 
 In the rest of this lesson we will focus 
-on tools for 
+on tools that ease the *communication* aspect
+of collaborative software development.
 
 Continuous integration practices,
 including automated checks 
