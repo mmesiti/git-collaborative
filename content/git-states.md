@@ -71,41 +71,67 @@ them into each other.
 
 
 ## Undoing `git add`
-Undoing `git add <path>` means
+Undoing `git add <path>` typically means
+either 
+to remove the file from the index completely,
+but leaving it in the working tree
+or
 to recover the previous state of a file 
-in the index.
+in the index 
+.
 This might not be always possible,
 but in most cases the previous state 
 is the one in the last commit (`HEAD`).
+
+
+:::{list-table} Undoing `git add`
+* - **Problem**
+  - **Solution**
+* - File should not be tracked at all
+  - `git rm --cached <filename>`
+* - Changes to file should not go  
+    in  the next commit
+  - `git restore --staged <filename>`
+:::
+
 
 ## Undoing `git commit`
 
 The `commit` command cannot actually be undone *completely*,
 since it created another immutable {term}`object` in the git repository.
 
-**Practically**, there are 3 different effects of `git commit`
+**Practically**, there are some different effects of `git commit`
 that we might want to undo:
 
 :::{list-table} Undoing `git commit`
-* - Problem
-  - Solution
-  - Comments
-
+* - **Problem**
+  - **Solution**
+  - **Comments**
 * - Change to the files  
     in the repository
   - `git revert <commit>`
   - Creates another commit   
     with the opposite changes
+* - Forgot to add a file  
+    before committing
+  - `git commit`  
+    `--amend`  
+    `--no-edit`
+  - You can add the file,  
+    and then run this command.  
+    **Don't do it after `git push`**
 * - Wrong commit message
-  - `git commit --amend`
+  - `git commit  --amend`
   - You can change the commit message.  
-    Dont' do it after `git push`
+    **Don't do it after `git push`**
 * - Branch has moved  
     to new commit
-  - `git reset --soft <last-good-commit>`
+  - `git reset`  
+    `--soft`  
+    `<last-good-commit>`
   - Moves the current branch  
     to the chosen commit.  
-    Dont' do it after `push`
+    **Don't do it after `git push`**
 :::
 
 
@@ -141,4 +167,6 @@ very useful when some additional finesse is required.
 - A convenient guide 
   to get out of unpleasant situations 
   can be found [here](https://dangitgit.com/en).
+- An alternative explanation of many useful "life-saving" commands
+  is available [here](https://coderefinery.github.io/git-intro/recovering/)
 :::

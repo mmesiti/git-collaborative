@@ -83,12 +83,12 @@ internals.md
 branches.md
 archaeology.md
 git-states.md
-collaboration-fear.md
 collaboration-concepts.md
 same-repository.md
 code-review.md
 forking-workflow.md
 interrupted.md
+tooling.md
 ```
 
 ```{toctree}

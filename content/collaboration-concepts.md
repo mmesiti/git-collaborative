@@ -144,3 +144,32 @@ which can be configured at these pages:
 - [gitlab.com](https://gitlab.com/-/user_settings/personal_access_tokens)
 - [gitlab.kit.edu](https://gitlab.kit.edu/-/user_settings/personal_access_tokens)
  
+
+## Problems in Collaborative Software development
+
+Merging can be a difficult moment 
+in the life cycle of a software.
+
+Git will try to do *reasonable* operations
+when merging two different lines of work,
+but:
+- There might be an detectable ambiguity in the way that
+  two different lines of work can be reconciled
+  (this leads to a conflict)
+- the results are not guaranteed 
+  to give you working software all the times
+  (i.e., you don't get a conflict,
+  but the result is not correct either - *this is scarier*).
+
+Contributing to the main branch 
+as often as possible,
+to make the changes as small as possible,
+is a possible approach to reduce 
+the difficulty related to merging.
+
+In the following chapters we will focus 
+on tools that ease the *communication* aspect
+of collaborative software development.
+
+
+
