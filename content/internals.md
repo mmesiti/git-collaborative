@@ -21,6 +21,10 @@ in order to learn about
 
 ::::{prereq}
 For this exercise create a new repository and commit a couple of changes.
+You can also clone this repository: 
+```console
+$ git clone https://github.com/mmesiti/merge-fu.git
+```
 ::::
 
 Now that we've made a couple of commits let us look at what is happening under

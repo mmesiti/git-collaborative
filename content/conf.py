@@ -21,7 +21,7 @@ project = "Collaborative distributed version control @ KIT"
 copyright = "CodeRefinery team"
 author = "CodeRefinery team"
 github_user = "mmesiti"
-github_repo_name = "git-collaborative"  # auto-detected from dirname if blank
+github_repo_name = "git-intermediate"  # auto-detected from dirname if blank
 github_version = "main"
 conf_py_path = "/content/" # with leading and trailing slash
 

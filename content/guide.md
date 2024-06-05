@@ -7,20 +7,20 @@
     - Many people might want to use gitlab.kit.edu for this (or something else).
       It should be perfectly fine, but then the audience should be already segmented
       and different "tribes" should sit together.
-- 09:15 - 09:30: [Concepts around collaboration](https://mmesiti.github.io/git-collaborative/concepts/)
+- 09:15 - 09:30: [Concepts around collaboration](https://mmesiti.github.io/git-intermediate/concepts/)
     - Review (or explain) terms: Pull, push, clone, fork. Focus on pull and not fetch.
     - Focus more on clone and less on generating from templates and importing.
 - 09:30 - 10:00: [Branching and .git](https://mmesiti.github.io/git-intro/under-the-hood/)
 - 10:00 - 10:10: Holy Break
-- 10:10 - 11:00: [Centralized workflow](https://mmesiti.github.io/git-collaborative/same-repository/)
+- 10:10 - 11:00: [Centralized workflow](https://mmesiti.github.io/git-intermediate/same-repository/)
     - 10:10 - 10:20: Explain concepts and outcome
-    - 10:30 - 11:00: [Exercise and walkthrough](https://mmesiti.github.io/git-collaborative/same-repository/#exercise-preparation)
+    - 10:30 - 11:00: [Exercise and walkthrough](https://mmesiti.github.io/git-intermediate/same-repository/#exercise-preparation)
 - 11:00 - 11:10: Holy Break
-- 11:10 - 12:00: [Distributed version control and forking workflow](https://coderefinery.github.io/git-collaborative/distributed/)
+- 11:10 - 12:00: [Distributed version control and forking workflow](https://coderefinery.github.io/git-intermediate/distributed/)
     - 11:10 - 11:20: Explain concepts and outcome
-    - 11:20 - 12:00: [Exercise and walkthrough](https://mmesiti.github.io/git-collaborative/distributed/#exercise-preparation)
+    - 11:20 - 12:00: [Exercise and walkthrough](https://mmesiti.github.io/git-intermediate/distributed/#exercise-preparation)
 - 11:45 - 12:00: Holy Break 
-- 13:10 - 13:30: [How to contribute changes to somebody else’s project](https://coderefinery.github.io/git-collaborative/contributing/) and Q&A
+- 13:10 - 13:30: [How to contribute changes to somebody else’s project](https://coderefinery.github.io/git-intermediate/contributing/) and Q&A
 
 ## Why I modified this lesson
 
@@ -109,22 +109,22 @@ By the end of this lesson, learners should:
 
 - 08:50 - 09:00: Soft start and icebreaker question
 - 09:00 - 09:15: Recap Git, any HedgeDoc questions to highlight
-- 09:15 - 09:30: [Concepts around collaboration](https://coderefinery.github.io/git-collaborative/remotes/)
+- 09:15 - 09:30: [Concepts around collaboration](https://coderefinery.github.io/git-intermediate/remotes/)
     - Explain terms: Pull, push, clone, fork. Focus on pull and not fetch.
     - Focus more on clone and less on generating from templates and importing.
-- 09:30 - 11:00: [Centralized workflow](https://coderefinery.github.io/git-collaborative/centralized/)
+- 09:30 - 11:00: [Centralized workflow](https://coderefinery.github.io/git-intermediate/centralized/)
     - 9:30 - 9:45: Explain concepts
     - 9:45 - 9:55: Break
     - 9:55 - 10:00: Inform clearly what is expected outcome
-    - 10:00 - 10:30: [Exercise](https://coderefinery.github.io/git-collaborative/centralized/#exercise-preparation)
+    - 10:00 - 10:30: [Exercise](https://coderefinery.github.io/git-intermediate/centralized/#exercise-preparation)
     - 10:30 - 11:00: Instructors go through the exercise. Discussion and answering questions
 - 11:00 - 12:00: Lunch Break
-- 12:00 - 13:10: [Distributed version control and forking workflow](https://coderefinery.github.io/git-collaborative/distributed/)
+- 12:00 - 13:10: [Distributed version control and forking workflow](https://coderefinery.github.io/git-intermediate/distributed/)
     - 12:00 - 12:15: Concepts and what are exercise outcomes
-    - 12:15 - 12:45: [Exercise](https://coderefinery.github.io/git-collaborative/distributed/#exercise-preparation)
+    - 12:15 - 12:45: [Exercise](https://coderefinery.github.io/git-intermediate/distributed/#exercise-preparation)
     - 12:45 - 12:55 Break
     - 12:55 - 13:10: Instructors go through excercises. Discussion and answering questions
-- 13:10 - 13:30: [How to contribute changes to somebody else’s project](https://coderefinery.github.io/git-collaborative/contributing/) and Q&A
+- 13:10 - 13:30: [How to contribute changes to somebody else’s project](https://coderefinery.github.io/git-intermediate/contributing/) and Q&A
 
 
 ## Why we teach this lesson - original

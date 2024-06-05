@@ -1,7 +1,7 @@
 # Collaborative distributed version control and troubleshooting @ KIT
 
 _This material was originally developed by [CodeRefinery](https://coderefinery.org/).
-The original material is visible [here](https://coderefinery.github.io/git-collaborative/)
+The original material is visible [here](https://coderefinery.github.io/git-intermediate/)
 and [here](https://coderefinery.github.io/git-intro/)._
 
 The content of this workshop can be roughly divided in two parts.
@@ -97,7 +97,7 @@ merge-tooling.md
 reference
 exercises
 guide
-PDF version <https://mmesiti.github.io/git-collaborative/lesson.pdf>
+PDF version <https://mmesiti.github.io/git-intermediate/lesson.pdf>
 ```
 
 ```{toctree}
