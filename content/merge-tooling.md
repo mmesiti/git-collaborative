@@ -49,7 +49,7 @@ and typically some thought.
 Complex conflicts 
 can be made easier to understand 
 by configuring git to show also 
-the version in the *merge base*
+the version in the [*merge base*](https://www.git-scm.com/docs/git-merge-base)
 in addition to the two conflicting versions:
 
 ```console
@@ -510,10 +510,10 @@ of a feature branch
 before making a pull request
 (in this case,
 there are lower chances for conflicts 
-because we are not joining 
-two sets of changes together,
-we are just changing the way
-a set of change is partitioned into commits). 
+because we rebase 
+on a commit that is already 
+an ancestor of the current branch,
+e.g. `git rebase -i HEAD~3`).
 
 It is possible to perform the following actions
 on any commit in the range:
@@ -533,6 +533,7 @@ from [the manual](https://git-scm.com/docs/git-rebase#_interactive_mode).
 You can practice interactive rebase with
 ```console
 $ git switch rebase-me
+$ git reset reset --hard d30163f 
 $ git rebase -i rebase-onto-this
 ```
 :::
