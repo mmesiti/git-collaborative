@@ -135,7 +135,7 @@ that we might want to undo:
 :::
 
 
-:::{callout} Rewriting history considered (at the very minimum) rude
+:::{callout} Avoid rewriting published history
 If you have already published your changes 
 to a branch 
 with `git push`
@@ -143,7 +143,7 @@ and someone has already seen them
 (and perhaps started working on them)
 using `git reset` 
 or `git commit --amend` 
-would be **very rude**!
+could be considered **very rude**!
 
 Why?
 
@@ -151,8 +151,12 @@ With those commands
 you do, 
 in other words,
 *rewrite the history* of the branch.
-The tracking information of the branches 
-in the other repositories
+This means that the tracking information of the branches 
+in the other repositories might be inconsistent.
+
+If someone works on a history that has been later rewritten, it might result in
+introduction of undesired modifications to the repository. Moreover, it might be
+hard to spot that such changes occurred.
 
 
 In that case, 
