@@ -18,7 +18,7 @@ We will record changes in two ways:
   at a certain point in time,
   gets a unique identifier 
   (called a {term}`hash`, e.g. `c7f0e8bfc718be04525847fc7ac237f470add76e`).
-  Usually you can use be lazy and use only the first 4 characters
+  Usually you can be lazy and use only the first 4 characters
   wherever a commit hash is needed.
 
 - {term}`branch`: Independent development line. The main development line is often called `main`.
