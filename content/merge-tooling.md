@@ -5,7 +5,6 @@ that can be used to
 add the work done in a branch 
 into another branch.
 
-
 For the following demonstration,
 you can clone a toy repository 
 created on purpose:
@@ -242,7 +241,7 @@ But it shows that:
 1. conflicts might be annoying,
    but are actually a good thing;
 1. merges should always be checked in some way,
-   by a human and/or with an automatice test suite.
+   by a human and/or with an automatic test suite.
 
 To fix this, we can undo the commit 
 in one of the ways we have already seen.
@@ -261,26 +260,6 @@ See the [documentation](https://www.git-scm.com/docs/git-revert#Documentation/gi
 for `git revert`.
 :::
 
-
-## Rebase
-
-`git rebase` is an alternative to `git merge` 
-that typically leads to a clearer commit history.
-
-In particular:
-- an additional merge commit is not necessary
-- the commit graph has no bifurcations
-
-```{callout} The Golden Rule of Rebase
-Do not be rude:
-`git rebase` *rewrites history*:
-never rebase public branches!
-```
-
-TODO:
-- create rebaseme branch
-- mention branch backup or reflog.
-- go to the end this time and show end result with `git gl`
 
 ## Cherry-Pick 
 
@@ -341,6 +320,7 @@ To do so, we switch to the `proverb` branch
 $ git switch proverb
 ```
 and use `git cherry-pick`
+with the commit we want to apply
 ```console
 $ git cherry-pick  good-and-bad-commits~
 Auto-merging wisdom.txt
@@ -357,13 +337,183 @@ hint: run "git cherry-pick --abort".
 We have a conflict,
 but the resolution in this case is trivial.
 
+## Rebase
+
+`git rebase` is an alternative to `git merge` 
+that typically leads to a clearer commit history.
+
+In particular:
+- an additional merge commit is not necessary
+- the commit graph has no bifurcations
+
+The `rebase` command 
+will try to reapply 
+all the commits on the current branch
+on top of another branch
+(which will be left untouched),
+and then point the current branch
+at the last commit.
+
+```{callout} The Golden Rule of Rebase
+Do not be rude:
+`git rebase` *rewrites history*.
+Be very careful when rebasing public branches!
+```
+
+### Rebase demo
+
+For this demo we will switch on branch `rebase-me`
+```console
+$ git switch rebase-me
+```
+and try to rebase it onto the branch `rebase-onto-this`,
+which we need to create locally
+from the remote branch,
+with this command:
+```console
+$ git branch rebase-onto-this origin/rebase-onto-this
+```
+We can have a look
+at the branch structure:
+```console
+$ git gl rebase-me rebase-onto-this
+* 3b514df (rebase-onto-this) Add line at end
+* e459dcd Add an intermezzo
+* a4cc39e (origin/branch-1, branch-1) 2nd commit - on branch-1
+| * d30163f (HEAD -> rebase-me) 3rd commit - on branch rebase-me
+| * 98f36f0 2nd commit - on branch rebase-me
+|/  
+* 874ebe0 (origin/main, origin/HEAD, main) First commit
+```
+We see that:
+- there is a bifurcation at `874ebe0`
+- our current branch (`rebase-me`)
+  has 2 commits above the merge base
+- the branch we want to rebase on
+  (`rebase-onto-this`)
+  has 3 commits above the merge base.
+
+To be able to compare the end result
+with the initial situation,
+we create a "backup branch" as a bookmark:
+```console
+$ git branch rebase-me-original rebase-me
+```
+
+We now can do the proper rebase.
+Make sure we are on the `rebase-me` branch:
+```console
+$ git branch 
+  branch-1
+  branch-2
+  good-and-bad-commits
+  main
+  proverbs
+* rebase-me
+  rebase-me-original
+  rebase-onto-this
+```
+then we invoke the rebase command
+to rebase the current branch (`rebase-me`)
+onto `rebase-onto-this`:
+```console
+$ git rebase rebase-onto-this
+```
+This command will try to apply 
+all the commits on the current branch (`rebase-me`)
+onto the branch `rebase-onto-this`,
+one at a time.
+For each commit we might get a conflict,
+which is the first thing 
+```console
+Auto-merging text-file.txt
+CONFLICT (content): Merge conflict in text-file.txt
+error: could not apply 98f36f0... 2nd commit - on branch rebase-me
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+Could not apply 98f36f0... 2nd commit - on branch rebase-me
+```
+We can resolve this conflict in the way we please.
+```console
+$ # edit text-file.txt
+```
+Once we are done,
+we can add our changes:
+```console
+$ git add text-file.txt
+```
+and tell rebase to continue to the next commit:
+```console
+$ git rebase --continue
+```
+When rebase can automatically merge without commits,
+it will not ask for our intervention,
+but when there are conflicts it will stop and ask us to solve them,
+`git add` the results 
+and then use `git rebase --continue`.
+
+After all the commits on the current branch are processed,
+we will get a linear commit history for the current branch:
+```console
+$ git log --oneline
+f5b0417 (HEAD -> rebase-me) 3rd commit - on branch rebase-me
+3b514df (rebase-onto-this) Add line at end
+e459dcd Add an intermezzo
+a4cc39e (origin/branch-1, branch-1) 2nd commit - on branch-1
+874ebe0 (origin/main, origin/HEAD, main) First commit
+```
+We can compare the new commit history
+with the original position of the branch:
+```console
+$ git gl rebase-me rebase-me-original
+* f5b0417 (HEAD -> rebase-me) 3rd commit - on branch rebase-me
+* 3b514df (rebase-onto-this) Add line at end
+* e459dcd Add an intermezzo
+* a4cc39e (origin/branch-1, branch-1) 2nd commit - on branch-1
+| * d30163f (rebase-me-original) 3rd commit - on branch rebase-me
+| * 98f36f0 2nd commit - on branch rebase-me
+|/  
+* 874ebe0 (origin/main, origin/HEAD, main) First commit
+```
+
+As `merge` and `cherry-pick`,
+`rebase` has a `--abort` option.
+
+If we are not satisfied by the result of the rebase
+after it completed,
+we can use `git reflog rebase-me` 
+to determine the last satisfactory commit,
+and use `git reset` to move the branch 
+to point there again.
+
+Sometimes, 
+the same conflicts will need to be solved
+over and over in the same way.
+In such a situation, the [`rerere` command](https://git-scm.com/book/en/v2/Git-Tools-Rerere)
+(`re`use `re`corded `re`solution)
+may come in handy.
+
 ## Interactive rebase
 
 `git rebase` has an interactive mode
+(that can be entered using the `-i` flag,
+or `--interactive`)
 that can be used to 
-rewrite the commit history in a range.
+perform complex manipulations of 
+the commit history in a range.
 
-It is very powerful.
+It is very powerful,
+and it is also used to clean the commit history
+of a feature branch 
+before making a pull request
+(in this case,
+there are lower chances for conflicts 
+because we are not joining 
+two sets of changes together,
+we are just changing the way
+a set of change is partitioned into commits). 
 
 It is possible to perform the following actions
 on any commit in the range:
@@ -374,7 +524,16 @@ on any commit in the range:
   to the previous picked commit.
 - **edit**: change the files and the commit message 
   (even create new commits in the meantime - the opposite of squashing)
+- **exec**: pause the rebasing and run a command there (e.g., a test suite) 
 
 More information can be read 
 from [the manual](https://git-scm.com/docs/git-rebase#_interactive_mode).
+
+:::{exercise} Interactive rebase on another branch
+You can practice interactive rebase with
+```console
+$ git switch rebase-me
+$ git rebase -i rebase-onto-this
+```
+:::
 
