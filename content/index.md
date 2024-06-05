@@ -59,7 +59,9 @@ especially when collaborating with other people.
 1. Be able to fix common issues encountered 
    when deviating from the simplest workflow
    (*pull - add - commit - push*);
+1. Bonus point: fix issues in this repository
 ```
+
 
 
 ```{prereq}
