@@ -2,7 +2,8 @@
 
 _This material was originally developed by [CodeRefinery](https://coderefinery.org/).
 The original material is visible [here](https://coderefinery.github.io/git-intermediate/)
-and [here](https://coderefinery.github.io/git-intro/)._
+and [here](https://coderefinery.github.io/git-intro/).
+Pull requests and fixes are welcome!_
 
 The content of this workshop can be roughly divided in two parts.
 
@@ -24,7 +25,7 @@ Being able to share more easily (going down the above list) is *transformative*,
 because it allows projects to scale to a new level.
 **This can’t be done without proper tools.**
 
-We will practice
+We will discuss
 the centralized as well as the forking workflows.  
 During the workshop, 
 you will collaborate in small groups using the same {term}`forge`.  

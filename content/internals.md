@@ -1,4 +1,4 @@
-# Git internals: Objects and Branches
+# Optional: Git Internals
 
 ```{objectives}
 - Understand what is easy to do with git, and what is not easy

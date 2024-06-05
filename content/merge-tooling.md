@@ -56,6 +56,10 @@ in addition to the two conflicting versions:
 git config --global merge.conflictstyle diff3
 ```
 
+Using a *merge tool* can also help 
+when there are large change sets to merge.
+Please refer to the [documentation](https://www.git-scm.com/docs/git-mergetool)
+for more information.
 
 ### Merge Conflict and abort 
 Let us now try to merge `branch-1`

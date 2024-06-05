@@ -2,25 +2,19 @@
 
 ## Schedule
 
-- 08:50 - 09:00: Soft start and icebreaker question
-- 09:00 - 09:15: Necessary introductions, forming groups. 
-    - Many people might want to use gitlab.kit.edu for this (or something else).
-      It should be perfectly fine, but then the audience should be already segmented
-      and different "tribes" should sit together.
-- 09:15 - 09:30: [Concepts around collaboration](https://mmesiti.github.io/git-intermediate/concepts/)
-    - Review (or explain) terms: Pull, push, clone, fork. Focus on pull and not fetch.
-    - Focus more on clone and less on generating from templates and importing.
-- 09:30 - 10:00: [Branching and .git](https://mmesiti.github.io/git-intro/under-the-hood/)
-- 10:00 - 10:10: Holy Break
-- 10:10 - 11:00: [Centralized workflow](https://mmesiti.github.io/git-intermediate/same-repository/)
-    - 10:10 - 10:20: Explain concepts and outcome
-    - 10:30 - 11:00: [Exercise and walkthrough](https://mmesiti.github.io/git-intermediate/same-repository/#exercise-preparation)
-- 11:00 - 11:10: Holy Break
-- 11:10 - 12:00: [Distributed version control and forking workflow](https://coderefinery.github.io/git-intermediate/distributed/)
-    - 11:10 - 11:20: Explain concepts and outcome
-    - 11:20 - 12:00: [Exercise and walkthrough](https://mmesiti.github.io/git-intermediate/distributed/#exercise-preparation)
-- 11:45 - 12:00: Holy Break 
-- 13:10 - 13:30: [How to contribute changes to somebody else’s project](https://coderefinery.github.io/git-intermediate/contributing/) and Q&A
+- 08:50: Soft start 
+- 09:00: Necessary introductions, forming groups. 
+- 09:15: Recap on Git basics 
+- 09:40: Beyond add and commit: undoing mistakes
+- 10:00: Inspecting history
+- 10:30: Break 
+- 10:50: Concepts around collaboration 
+- 11:00: Collaborating within the same repository 
+- 11:30: Demo: Code review
+- 11:40: Demo: How to contribute changes to repositories that belong to others
+- 11:50: Tooling and practices
+- 12:00: Merge and Beyond
+- 12:10: Free practice and discussion
 
 ## Why I modified this lesson
 
