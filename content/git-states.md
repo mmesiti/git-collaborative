@@ -1,4 +1,4 @@
-# Beyond add and commit
+# Beyond add and commit: undoing mistakes
 
 Most git users will typically use `pull`, `add`, `commit` and `push`
 and these 4 commands will perform >95% of the operations needed.
@@ -135,14 +135,28 @@ that we might want to undo:
 :::
 
 
-:::{callout} When is `git reset` dangerous?
-If you have already published your changes with `git push`
-and someone has already seen them,
-using `git reset` would be **very rude**!  
-Why?  
-It would force them to do 'weird things' 
-like the ones we are discussing here).
-In that case, it is just safer to use `git revert`!
+:::{callout} Rewriting history considered (at the very minimum) rude
+If you have already published your changes 
+to a branch 
+with `git push`
+and someone has already seen them
+(and perhaps started working on them)
+using `git reset` 
+or `git commit --amend` 
+would be **very rude**!
+
+Why?
+
+With those commands
+you do, 
+in other words,
+*rewrite the history* of the branch.
+The tracking information of the branches 
+in the other repositories
+
+
+In that case, 
+better to use 
 :::
 
 ## Patching: Partial commands

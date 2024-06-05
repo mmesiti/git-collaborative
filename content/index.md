@@ -24,12 +24,10 @@ Being able to share more easily (going down the above list) is *transformative*,
 because it allows projects to scale to a new level.
 **This can’t be done without proper tools.**
 
-- {term}`forge`: _a web-based collaborative software platform for both developing and sharing code_ (from [wikipedia](https://en.wikipedia.org/wiki/Forge_(software)))
-
 We will practice
 the centralized as well as the forking workflows.  
 During the workshop, 
-you will collaborate in small groups using the same forge.  
+you will collaborate in small groups using the same {term}`forge`.  
 Some of the details might not apply to the forge you are using, 
 please focus on the general ideas.
 
@@ -79,16 +77,17 @@ especially when collaborating with other people.
 :caption: Episodes
 
 commits.md
+git-states.md
+archaeology.md
 internals.md
 branches.md
-archaeology.md
-git-states.md
 collaboration-concepts.md
 same-repository.md
 code-review.md
 forking-workflow.md
 interrupted.md
 tooling.md
+merge-tooling.md
 ```
 
 ```{toctree}

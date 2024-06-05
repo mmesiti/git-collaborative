@@ -9,7 +9,6 @@ as a thin layer of abstraction on its *Object database*.
 - Manipulate local branches 
 ```
 
-
 In this exercise we will look inside the `.git` directory
 in order to learn about 
 how branches are implemented in Git,
@@ -175,7 +174,7 @@ If we do not exactly remember where it pointed,
 we can use `git reflog <branch name>`
 to get an idea of where it was moved.
 
-## Using complex commands conveniently: aliases in the git configuration
+## Visualizing branches efficiently
 
 When working with branches on the command line, 
 it is useful to look at the log with the following command
@@ -187,7 +186,7 @@ It is inconvenient to type such a long message every time.
 Git allows us to configure an alias for it,
 in this case it will be called `graph`:
 ```console
-$ git config --global alias.graph "log --all --oneline --graph"
+$ git config --global alias.graph "log --all --oneline --graph --decorate"
 ```
 After this configuration,
 we will be able to use `graph` as a git command

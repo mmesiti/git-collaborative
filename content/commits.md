@@ -26,20 +26,16 @@ We will record changes in two ways:
   Like a "commemorative plaque"
   that you attach to a particular commit (e.g. `phd-printed` or `paper-submitted`).
 - {term}`repository`: A copy of the project, contains all data and history (commits, branches, tags).
-- {term}`forge`: A web-based collaborative software platform for both developing and sharing code 
-  (e.g., github.com, gitlab.com, gitlab.kit.edu, bitbucket.org, codeberg.org)
+- {term}`forge`: *a web-based collaborative software platform for both developing and sharing code*
+  (from [wikipedia](https://en.wikipedia.org/wiki/Forge_(software))),
+  e.g. GitHub or GitLab
 - {term}`cloning <clone>`: Copying the whole repository - the first time,
   e.g. downloading it on your computer. It is not necessary to download each file one by one.
 - {term}`forking <fork>`: Cloning a repository (which is typically not yours) on a forge - your
   copy (fork) stays on the forge and you can make changes to your copy.
 
 
-## Background
-
-- Each commit is a snapshot of the entire project at a certain
-  point in time and has a unique identifier ({term}`hash`) .
-- A {term}`branch` is a line of development, and the `main` branch or `master` branch
-  are often the default branch in Git.
+## Merging
 
 :::{figure} img/gopher/gophers.png
 :alt: Branching explained with a gopher
