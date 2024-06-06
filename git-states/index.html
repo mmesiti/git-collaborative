@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beyond add and commit: undoing mistakes &mdash; Collaborative distributed version control @ KIT  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=0c089442" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=187304be"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=582ca9e2"></script>
+        <script src="../_static/minipres.js?v=a0d29692"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script data-domain="coderefinery.github.io" defer="defer" src="https://plausible.cs.aalto.fi/js/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Inspecting history" href="../archaeology/" />
+    <link rel="prev" title="Quick recap on Git Basics: Commits and Branches" href="../commits/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Collaborative distributed version control @ KIT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Episodes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../commits/">Quick recap on Git Basics: Commits and Branches</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Beyond add and commit: undoing mistakes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-3-kinds-of-states-of-a-file-in-git">The 3 kinds of states of a file in Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#undoing-git-add">Undoing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#undoing-git-commit">Undoing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#patching-partial-commands">Patching: Partial commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../archaeology/">Inspecting history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internals/">Optional: Git Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../branches/">Operating on Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collaboration-concepts/">Concepts around collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../same-repository/">Collaborating within the same repository: issues and pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-review/">Code review demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forking-workflow/">How to contribute changes to repositories that belong to others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupted/">Interrupted work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/">Tooling and practices that you might find useful</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../merge-tooling/">Merge and beyond</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/#instructor-guide-original">Instructor guide - original</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mmesiti.github.io/git-intermediate/lesson.pdf">PDF version</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/core/">All lessons</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/">CodeRefinery</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/reusing/">Reusing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Collaborative distributed version control @ KIT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Beyond add and commit: undoing mistakes</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/mmesiti/git-intermediate/blob/main/content/git-states.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="beyond-add-and-commit-undoing-mistakes">
+<h1>Beyond add and commit: undoing mistakes<a class="headerlink" href="#beyond-add-and-commit-undoing-mistakes" title="Link to this heading"></a></h1>
+<p>Most git users will typically use <code class="docutils literal notranslate"><span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">commit</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code>
+and these 4 commands will perform &gt;95% of the operations needed.</p>
+<p>To be in control of Git,
+it is beneficial to know at least
+how to undo these commands.</p>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Undo <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code></p></li>
+<li><p>Undo <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p></li>
+<li><p>Understand that there are many states, and the complexity that this entails</p></li>
+</ul>
+</div>
+<p>Git offers you <strong>many versions</strong> of any file in the repository:</p>
+<ul class="simple">
+<li><p>the one in the <a class="reference internal" href="../reference/#term-working-tree"><span class="xref std std-term">working tree</span></a></p></li>
+<li><p>the one in the <a class="reference internal" href="../reference/#term-index"><span class="xref std std-term">index</span></a> (the index is also called “staging area”)</p></li>
+<li><p>as many versions as there are commits.</p></li>
+</ul>
+<p>The committed versions cannot be changed,
+but new commits can be created,
+and the versions in the <a class="reference internal" href="../reference/#term-working-tree"><span class="xref std std-term">working tree</span></a> and in the <a class="reference internal" href="../reference/#term-index"><span class="xref std std-term">index</span></a>
+can be overwritten.</p>
+<p>As a result, there can be many commands
+that are used to copy one version of a file into another.</p>
+<section id="the-3-kinds-of-states-of-a-file-in-git">
+<h2>The 3 kinds of states of a file in Git<a class="headerlink" href="#the-3-kinds-of-states-of-a-file-in-git" title="Link to this heading"></a></h2>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/git-trinity.png"><img alt="The states of a file in Git and the commands to copy version between them" src="../_images/git-trinity.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">The different versions of a file in Git
+and the commands that can be used to copy
+them into each other.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">The 3 Kinds of State of a file in Git - Table version</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>from \ to</p></td>
+<td><p>Working Tree</p></td>
+<td><p>Index</p></td>
+<td><p>HEAD</p></td>
+</tr>
+<tr class="row-even"><td><p>Working Tree</p></td>
+<td></td>
+<td><p>commit -a<br />
+<strong>add</strong></p></td>
+<td><p>commit -a</p></td>
+</tr>
+<tr class="row-odd"><td><p>Index</p></td>
+<td><p><strong>restore</strong></p></td>
+<td></td>
+<td><p><strong>commit</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;commit&gt;</span></code></p></td>
+<td><p>checkout<br />
+reset –hard<br />
+<strong>restore –source &lt;…&gt;</strong></p></td>
+<td><p>checkout<br />
+reset –hard<br />
+<strong>reset (–mixed)</strong><br />
+<strong>restore (–source &lt;…&gt;) –staged</strong></p></td>
+<td><p>checkout<br />
+reset –hard<br />
+reset (–mixed)<br />
+<strong>reset –soft</strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="undoing-git-add">
+<h2>Undoing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code><a class="headerlink" href="#undoing-git-add" title="Link to this heading"></a></h2>
+<p>Undoing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;path&gt;</span></code> typically means
+either
+to remove the file from the index completely,
+but leaving it in the working tree
+or
+to recover the previous state of a file
+in the index
+.
+This might not be always possible,
+but in most cases the previous state
+is the one in the last commit (<code class="docutils literal notranslate"><span class="pre">HEAD</span></code>).</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Undoing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code></span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p><strong>Problem</strong></p></td>
+<td><p><strong>Solution</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>File should not be tracked at all</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">--cached</span> <span class="pre">&lt;filename&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Changes to file should not go<br />
+in  the next commit</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">--staged</span> <span class="pre">&lt;filename&gt;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="undoing-git-commit">
+<h2>Undoing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code><a class="headerlink" href="#undoing-git-commit" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">commit</span></code> command cannot actually be undone <em>completely</em>,
+since it created another immutable <a class="reference internal" href="../reference/#term-object"><span class="xref std std-term">object</span></a> in the git repository.</p>
+<p><strong>Practically</strong>, there are some different effects of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>
+that we might want to undo:</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Undoing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p><strong>Problem</strong></p></td>
+<td><p><strong>Solution</strong></p></td>
+<td><p><strong>Comments</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Change to the files<br />
+in the repository</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span> <span class="pre">&lt;commit&gt;</span></code></p></td>
+<td><p>Creates another commit<br />
+with the opposite changes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Forgot to add a file<br />
+before committing</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">--amend</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">--no-edit</span></code></p></td>
+<td><p>You can add the file,<br />
+and then run this command.<br />
+<strong>Don’t do it after <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Wrong commit message</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span>&#160; <span class="pre">--amend</span></code></p></td>
+<td><p>You can change the commit message.<br />
+<strong>Don’t do it after <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Branch has moved<br />
+to new commit</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">--soft</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">&lt;last-good-commit&gt;</span></code></p></td>
+<td><p>Moves the current branch<br />
+to the chosen commit.<br />
+<strong>Don’t do it after <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-avoid-rewriting-published-history callout admonition" id="callout-0">
+<p class="admonition-title">Avoid rewriting published history</p>
+<p>If you have already published your changes
+to a branch
+with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>
+and someone has already seen them
+(and perhaps started working on them)
+using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code>
+or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code>
+could be considered <strong>very rude</strong>!</p>
+<p>Why?</p>
+<p>With those commands
+you do,
+in other words,
+<em>rewrite the history</em> of the branch.
+This means that the tracking information of the branches
+in the other repositories might be inconsistent.</p>
+<p>If someone works on a history that has been later rewritten, it might result in
+introduction of undesired modifications to the repository. Moreover, it might be
+hard to spot that such changes occurred.</p>
+<p>In that case,
+better to use</p>
+</div>
+</section>
+<section id="patching-partial-commands">
+<h2>Patching: Partial commands<a class="headerlink" href="#patching-partial-commands" title="Link to this heading"></a></h2>
+<p>Most of the commands listed above
+accept a <code class="docutils literal notranslate"><span class="pre">--patch</span></code> (or <code class="docutils literal notranslate"><span class="pre">-p</span></code>) option
+that allows to interactively select
+the parts (<em>hunks</em>) of a file that will be copied,
+very useful when some additional finesse is required.</p>
+<div class="admonition-take-home-messages keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Take-home messages</p>
+<ul class="simple">
+<li><p>To undo <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>,
+typically you need to copy the content of <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>
+into the index.
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">--staged</span> <span class="pre">&lt;file-path&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code>
+will do it.</p></li>
+<li><p>To undo a commit, typically you want to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code>.
+If you have not used <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> yet,
+you have fancier options.</p></li>
+<li><p>A convenient guide
+to get out of unpleasant situations
+can be found <a class="reference external" href="https://dangitgit.com/en">here</a>.</p></li>
+<li><p>An alternative explanation of many useful “life-saving” commands
+is available <a class="reference external" href="https://coderefinery.github.io/git-intro/recovering/">here</a></p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../commits/" class="btn btn-neutral float-left" title="Quick recap on Git Basics: Commits and Branches" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../archaeology/" class="btn btn-neutral float-right" title="Inspecting history" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

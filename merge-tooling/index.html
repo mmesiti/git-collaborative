@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merge and beyond &mdash; Collaborative distributed version control @ KIT  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=0c089442" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=187304be"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=582ca9e2"></script>
+        <script src="../_static/minipres.js?v=a0d29692"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script data-domain="coderefinery.github.io" defer="defer" src="https://plausible.cs.aalto.fi/js/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Quick reference" href="../reference/" />
+    <link rel="prev" title="Tooling and practices that you might find useful" href="../tooling/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Collaborative distributed version control @ KIT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Episodes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../commits/">Quick recap on Git Basics: Commits and Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git-states/">Beyond add and commit: undoing mistakes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archaeology/">Inspecting history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internals/">Optional: Git Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../branches/">Operating on Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collaboration-concepts/">Concepts around collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../same-repository/">Collaborating within the same repository: issues and pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-review/">Code review demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forking-workflow/">How to contribute changes to repositories that belong to others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupted/">Interrupted work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/">Tooling and practices that you might find useful</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Merge and beyond</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#merge">Merge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#merge-conflict-and-abort">Merge Conflict and abort</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#no-conflicts-but-still-wrong">No conflicts, but still wrong</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cherry-pick">Cherry-Pick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rebase">Rebase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rebase-demo">Rebase demo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interactive-rebase">Interactive rebase</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/#instructor-guide-original">Instructor guide - original</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mmesiti.github.io/git-intermediate/lesson.pdf">PDF version</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/core/">All lessons</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/">CodeRefinery</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/reusing/">Reusing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Collaborative distributed version control @ KIT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Merge and beyond</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/mmesiti/git-intermediate/blob/main/content/merge-tooling.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="merge-and-beyond">
+<h1>Merge and beyond<a class="headerlink" href="#merge-and-beyond" title="Link to this heading"></a></h1>
+<p>Git exposes many commands
+that can be used to
+add the work done in a branch
+into another branch.</p>
+<p>For the following demonstration,
+you can clone a toy repository
+created on purpose:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mmesiti/merge-fu.git
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>merge-fu
+</pre></div>
+</div>
+<p>Have a look at the branch structure:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>graph<span class="w"> </span><span class="c1"># alias for git log --oneline --all --graph --decorate</span>
+</pre></div>
+</div>
+<p>For what follows,
+we do not want to see all the branches all the time,
+so we want to define a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">gl</span></code> alias <em>locally</em>
+without the <code class="docutils literal notranslate"><span class="pre">--all</span></code> flag:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>config<span class="w"> </span>alias.gl<span class="w"> </span>--oneline<span class="w"> </span>--graph<span class="w"> </span>--decorate
+</pre></div>
+</div>
+<p>so that we can use it like this:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>gl<span class="w"> </span>branch-1<span class="w"> </span>branch-2
+</pre></div>
+</div>
+<section id="merge">
+<h2>Merge<a class="headerlink" href="#merge" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> is the classic command
+that is used join
+(potentially more than 2)
+branches together.</p>
+<p>It will create an additional commit,
+called the <em>merge commit</em>.</p>
+<p>When Git cannot determine unambiguously
+how to merge two versions of a given file,
+it will produce a <em>conflict</em>.</p>
+<p>Solving conflicts requires some practice
+and typically some thought.</p>
+<p>Complex conflicts
+can be made easier to understand
+by configuring git to show also
+the version in the <a class="reference external" href="https://www.git-scm.com/docs/git-merge-base"><em>merge base</em></a>
+in addition to the two conflicting versions:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git config --global merge.conflictstyle diff3</span>
+</pre></div>
+</div>
+<p>Using a <em>merge tool</em> can also help
+when there are large change sets to merge.
+Please refer to the <a class="reference external" href="https://www.git-scm.com/docs/git-mergetool">documentation</a>
+for more information.</p>
+<section id="merge-conflict-and-abort">
+<h3>Merge Conflict and abort<a class="headerlink" href="#merge-conflict-and-abort" title="Link to this heading"></a></h3>
+<p>Let us now try to merge <code class="docutils literal notranslate"><span class="pre">branch-1</span></code>
+into <code class="docutils literal notranslate"><span class="pre">branch-2</span></code>.
+We first need to create
+the local branches
+that match the remote ones:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>branch-1<span class="w"> </span>origin/branch-1
+<span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>branch-2<span class="w"> </span>origin/branch-2
+</pre></div>
+</div>
+<p>We can check what are the differences
+between the two branches:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>diff<span class="w"> </span>branch-1<span class="w"> </span>branch-2
+<span class="go">diff --git a/text-file.txt b/text-file.txt</span>
+<span class="go">index b7062f5..ce1f6b8 100644</span>
+<span class="go">--- a/text-file.txt</span>
+<span class="go">+++ b/text-file.txt</span>
+<span class="go">@@ -1,4 +1,4 @@</span>
+<span class="go"> 1st line</span>
+<span class="go"> 2nd line</span>
+<span class="go"> 3rd line</span>
+<span class="go">-4th line on branch 1</span>
+<span class="go">+4th line on branch 2</span>
+</pre></div>
+</div>
+<div class="admonition-predict-conflicts exercise important admonition" id="exercise-0">
+<p class="admonition-title">Predict conflicts</p>
+<p>Will the merge between branch-1 and branch-2 cause a conflict?
+Why?</p>
+<div class="admonition-solution solution important dropdown admonition" id="solution-0">
+<p class="admonition-title">Solution</p>
+<p>Unfortunately, yes.
+Both versions have appended lines at the end,
+and Git cannot determine in which order they need to be.</p>
+</div>
+</div>
+<p>First of all,
+to do the merge
+we need to switch to <code class="docutils literal notranslate"><span class="pre">branch-2</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>branch-2
+</pre></div>
+</div>
+<p>We will get a conflict:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>merge<span class="w"> </span>branch-1
+<span class="go">Auto-merging text-file.txt</span>
+<span class="go">CONFLICT (content): Merge conflict in text-file.txt</span>
+<span class="go">Automatic merge failed; fix conflicts and then commit the result.</span>
+</pre></div>
+</div>
+<p>We can check the content of <code class="docutils literal notranslate"><span class="pre">text-file.txt</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>text-file.txt
+<span class="go">1st line</span>
+<span class="go">2nd line</span>
+<span class="go">3rd line</span>
+<span class="go">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span class="go">4th line on branch 2</span>
+<span class="go">||||||| 874ebe0</span>
+<span class="go">4th line</span>
+<span class="go">=======</span>
+<span class="go">4th line on branch 1</span>
+<span class="go">&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-1</span>
+</pre></div>
+</div>
+<p>If we know how to solve it,
+we can modify the file,
+stage it and commit.</p>
+<p>But what to do in the unhappy situation
+where we are not sure how to proceed?
+We stop the merge with the command</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>merge<span class="w"> </span>--abort
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--abort</span></code> option
+is a useful “handbrake”
+that works also with other commands.</p>
+</section>
+</section>
+<section id="no-conflicts-but-still-wrong">
+<h2>No conflicts, but still wrong<a class="headerlink" href="#no-conflicts-but-still-wrong" title="Link to this heading"></a></h2>
+<p>There are cases where
+a conflictless <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>
+can introduce a bug.</p>
+<p>For example,
+switch to the branch <code class="docutils literal notranslate"><span class="pre">python-example</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>python-example
+</pre></div>
+</div>
+<p>Check the content of the <code class="docutils literal notranslate"><span class="pre">example.py</span></code> file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>example.py
+<span class="go">def add1(n):</span>
+<span class="go">    res = n</span>
+
+<span class="go">    print(&quot;This function adds 1 to the input&quot;)</span>
+
+<span class="go">    return res</span>
+</pre></div>
+</div>
+<p>This is obviously wrong:
+the function is not adding 1.</p>
+<p>Fortunately, we have already two possible fixes,
+by Alice and Bob.
+One is on branch <code class="docutils literal notranslate"><span class="pre">python-example-fix-1</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>python-example-fix-1
+<span class="gp">$ </span>cat<span class="w"> </span>example.py
+<span class="go">def add1(n):</span>
+<span class="go">    res = n + 1</span>
+
+<span class="go">    print(&quot;This function adds 1 to the input&quot;)</span>
+
+<span class="go">    return res</span>
+</pre></div>
+</div>
+<p>And another is on branch <code class="docutils literal notranslate"><span class="pre">pythyon-example-fix-2</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>python-example-fix-2
+<span class="gp">$ </span>cat<span class="w"> </span>example.py
+<span class="go">def add1(n):</span>
+<span class="go">    res = n</span>
+
+<span class="go">    print(&quot;This function adds 1 to the input&quot;)</span>
+
+<span class="go">    return res + 1</span>
+</pre></div>
+</div>
+<p>They are just one commit away from <code class="docutils literal notranslate"><span class="pre">python-example</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>gl<span class="w"> </span>python-example-fix-1<span class="w"> </span>python-example-fix-2
+<span class="go">* 4d8b65f (origin/python-example-fix-2, python-example-fix-2) fix add1</span>
+<span class="go">| * 0392b16 (origin/python-example-fix-1, python-example-fix-1) fix add1</span>
+<span class="go">|/  </span>
+<span class="go">* ff35a6e (HEAD -&gt; python-example, origin/python-example) add python example</span>
+<span class="go">* 874ebe0 (origin/main, origin/HEAD, main) First commit</span>
+</pre></div>
+</div>
+<p>Excellent!
+We will merge them both
+into <code class="docutils literal notranslate"><span class="pre">python-example</span></code>,
+to make everybody feel like
+their work is appreciated.
+We switch to the <code class="docutils literal notranslate"><span class="pre">python-example</span></code> branch:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>python-example
+<span class="go">Switched to branch &#39;python-example&#39;</span>
+<span class="go">Your branch is up to date with &#39;origin/python-example&#39;.</span>
+</pre></div>
+</div>
+<p>We merge first <code class="docutils literal notranslate"><span class="pre">python-example-fix-1</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git merge python-example-fix-1 
+Updating ff35a6e..0392b16
+Fast-forward
+ example.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</pre></div>
+</div>
+<p>This merge is a <em>fast forward</em>:
+<code class="docutils literal notranslate"><span class="pre">python-example-fix-1</span></code> is a direct descendant of
+the <code class="docutils literal notranslate"><span class="pre">python-example</span></code>
+so <code class="docutils literal notranslate"><span class="pre">python-example</span></code> can be just moved forward
+without too much thinking.</p>
+<p>We then merge <code class="docutils literal notranslate"><span class="pre">python-example-fix-2</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git merge python-example-fix-2
+Auto-merging example.py
+Merge made by the &#39;ort&#39; strategy.
+ example.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</pre></div>
+</div>
+<p>The file is now <strong>wrong</strong>, though:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>example.py
+<span class="go">def add1(n):</span>
+<span class="go">    res = n + 1</span>
+
+<span class="go">    print(&quot;This function adds 1 to the input&quot;)</span>
+
+<span class="go">    return res + 1</span>
+</pre></div>
+</div>
+<p>We are adding 1 twice!</p>
+<p>This is obviously a contrived example.
+But it shows that:</p>
+<ol class="arabic simple">
+<li><p>conflicts might be annoying,
+but are actually a good thing;</p></li>
+<li><p>merges should always be checked in some way,
+by a human and/or with an automatic test suite.</p></li>
+</ol>
+<p>To fix this, we can undo the commit
+in one of the ways we have already seen.</p>
+<div class="admonition-optional-revert-a-merge-commit exercise important admonition" id="exercise-1">
+<p class="admonition-title">Optional: <code class="docutils literal notranslate"><span class="pre">revert</span></code> a merge commit</p>
+<p>When reverting a merge commit,
+it is not clear which is the parent commit
+to which we want to revert.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">-m</span></code> option
+(<code class="docutils literal notranslate"><span class="pre">--mainline</span></code>)
+to select the version
+you want to revert to.
+See the <a class="reference external" href="https://www.git-scm.com/docs/git-revert#Documentation/git-revert.txt--mparent-number">documentation</a>
+for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code>.</p>
+</div>
+</section>
+<section id="cherry-pick">
+<h2>Cherry-Pick<a class="headerlink" href="#cherry-pick" title="Link to this heading"></a></h2>
+<p>There might be a commit in a branch
+that we want to use,
+without merging the whole branch on which it was created.</p>
+<p>For this we will consider the branches
+<code class="docutils literal notranslate"><span class="pre">proverbs</span></code> and ‘good-and-bad-commits’:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>gl<span class="w"> </span>proverbs<span class="w"> </span>good-and-bad-commits<span class="w"> </span>
+</pre></div>
+</div>
+<p>The branch that contains our work is <code class="docutils literal notranslate"><span class="pre">proverbs</span></code>,
+where we started a collection of popular pieces of wisdom.
+Perhaps the branch <code class="docutils literal notranslate"><span class="pre">good-and-bad-commits</span></code>
+contains some useful work?
+We can check it with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-p</span></code>,
+which will show all the changes
+along with the commit messages:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>-p<span class="w"> </span>proverbs..good-and-bad-commits<span class="w"> </span><span class="p">|</span><span class="w"> </span>cat
+<span class="go">9396ffd git is hard!!!!!</span>
+<span class="go">diff --git a/wisdom.txt b/wisdom.txt</span>
+<span class="go">index b3c8fac..ec51263 100644</span>
+<span class="go">--- a/wisdom.txt</span>
+<span class="go">+++ b/wisdom.txt</span>
+<span class="go">@@ -4,3 +4,6 @@ Early to bed,</span>
+<span class="go"> early to rise,</span>
+<span class="go"> makes a man wealthy, </span>
+<span class="go"> healthy, and wise.</span>
+<span class="go">+</span>
+<span class="go">+</span>
+<span class="go">+I HATE VERSION CONTROL!</span>
+<span class="go">82cfb15 Add proverb</span>
+<span class="go">diff --git a/wisdom.txt b/wisdom.txt</span>
+<span class="go">index c343ccb..b3c8fac 100644</span>
+<span class="go">--- a/wisdom.txt</span>
+<span class="go">+++ b/wisdom.txt</span>
+<span class="go">@@ -1 +1,6 @@</span>
+<span class="gp"> # </span>Old<span class="w"> </span>Proverbs
+<span class="go">+</span>
+<span class="go">+Early to bed,</span>
+<span class="go">+early to rise,</span>
+<span class="go">+makes a man wealthy, </span>
+<span class="go">+healthy, and wise.</span>
+</pre></div>
+</div>
+<p>here <code class="docutils literal notranslate"><span class="pre">proverbs..good-and-bad-commits</span></code>
+is a way of specifying the range of commits
+above <em>merge base</em> on the branch <code class="docutils literal notranslate"><span class="pre">good-and-bad-commits</span></code>.</p>
+<p>Once we see the content of each commit,
+we become interested in applying
+the second-last commit on <code class="docutils literal notranslate"><span class="pre">good-and-bad-commits</span></code>
+to the <code class="docutils literal notranslate"><span class="pre">proverb</span></code> branch.</p>
+<p>To do so, we switch to the <code class="docutils literal notranslate"><span class="pre">proverb</span></code> branch</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>proverb
+</pre></div>
+</div>
+<p>and use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherry-pick</span></code>
+with the commit we want to apply</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>cherry-pick<span class="w">  </span>good-and-bad-commits~
+<span class="go">Auto-merging wisdom.txt</span>
+<span class="go">CONFLICT (content): Merge conflict in wisdom.txt</span>
+<span class="go">error: could not apply 82cfb15... Add proverb</span>
+<span class="go">hint: After resolving the conflicts, mark them with</span>
+<span class="go">hint: &quot;git add/rm &lt;pathspec&gt;&quot;, then run</span>
+<span class="go">hint: &quot;git cherry-pick --continue&quot;.</span>
+<span class="go">hint: You can instead skip this commit with &quot;git cherry-pick --skip&quot;.</span>
+<span class="go">hint: To abort and get back to the state before &quot;git cherry-pick&quot;,</span>
+<span class="go">hint: run &quot;git cherry-pick --abort&quot;.</span>
+</pre></div>
+</div>
+<p>We have a conflict,
+but the resolution in this case is trivial.</p>
+</section>
+<section id="rebase">
+<h2>Rebase<a class="headerlink" href="#rebase" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> is an alternative to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>
+that typically leads to a clearer commit history.</p>
+<p>In particular:</p>
+<ul class="simple">
+<li><p>an additional merge commit is not necessary</p></li>
+<li><p>the commit graph has no bifurcations</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">rebase</span></code> command
+will try to reapply
+all the commits on the current branch
+on top of another branch
+(which will be left untouched),
+and then point the current branch
+at the last commit.</p>
+<div class="admonition-the-golden-rule-of-rebase callout admonition" id="callout-0">
+<p class="admonition-title">The Golden Rule of Rebase</p>
+<p>Do not be rude:
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> <em>rewrites history</em>.
+Be very careful when rebasing public branches!</p>
+</div>
+<section id="rebase-demo">
+<h3>Rebase demo<a class="headerlink" href="#rebase-demo" title="Link to this heading"></a></h3>
+<p>For this demo we will switch on branch <code class="docutils literal notranslate"><span class="pre">rebase-me</span></code></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>rebase-me
+</pre></div>
+</div>
+<p>and try to rebase it onto the branch <code class="docutils literal notranslate"><span class="pre">rebase-onto-this</span></code>,
+which we need to create locally
+from the remote branch,
+with this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>rebase-onto-this<span class="w"> </span>origin/rebase-onto-this
+</pre></div>
+</div>
+<p>We can have a look
+at the branch structure:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>gl<span class="w"> </span>rebase-me<span class="w"> </span>rebase-onto-this
+<span class="go">* 3b514df (rebase-onto-this) Add line at end</span>
+<span class="go">* e459dcd Add an intermezzo</span>
+<span class="go">* a4cc39e (origin/branch-1, branch-1) 2nd commit - on branch-1</span>
+<span class="go">| * d30163f (HEAD -&gt; rebase-me) 3rd commit - on branch rebase-me</span>
+<span class="go">| * 98f36f0 2nd commit - on branch rebase-me</span>
+<span class="go">|/  </span>
+<span class="go">* 874ebe0 (origin/main, origin/HEAD, main) First commit</span>
+</pre></div>
+</div>
+<p>We see that:</p>
+<ul class="simple">
+<li><p>there is a bifurcation at <code class="docutils literal notranslate"><span class="pre">874ebe0</span></code></p></li>
+<li><p>our current branch (<code class="docutils literal notranslate"><span class="pre">rebase-me</span></code>)
+has 2 commits above the merge base</p></li>
+<li><p>the branch we want to rebase on
+(<code class="docutils literal notranslate"><span class="pre">rebase-onto-this</span></code>)
+has 3 commits above the merge base.</p></li>
+</ul>
+<p>To be able to compare the end result
+with the initial situation,
+we create a “backup branch” as a bookmark:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>rebase-me-original<span class="w"> </span>rebase-me
+</pre></div>
+</div>
+<p>We now can do the proper rebase.
+Make sure we are on the <code class="docutils literal notranslate"><span class="pre">rebase-me</span></code> branch:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>
+<span class="go">  branch-1</span>
+<span class="go">  branch-2</span>
+<span class="go">  good-and-bad-commits</span>
+<span class="go">  main</span>
+<span class="go">  proverbs</span>
+<span class="go">* rebase-me</span>
+<span class="go">  rebase-me-original</span>
+<span class="go">  rebase-onto-this</span>
+</pre></div>
+</div>
+<p>then we invoke the rebase command
+to rebase the current branch (<code class="docutils literal notranslate"><span class="pre">rebase-me</span></code>)
+onto <code class="docutils literal notranslate"><span class="pre">rebase-onto-this</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>rebase<span class="w"> </span>rebase-onto-this
+</pre></div>
+</div>
+<p>This command will try to apply
+all the commits on the current branch (<code class="docutils literal notranslate"><span class="pre">rebase-me</span></code>)
+onto the branch <code class="docutils literal notranslate"><span class="pre">rebase-onto-this</span></code>,
+one at a time.
+For each commit we might get a conflict,
+which is the first thing</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Auto-merging text-file.txt</span>
+<span class="go">CONFLICT (content): Merge conflict in text-file.txt</span>
+<span class="go">error: could not apply 98f36f0... 2nd commit - on branch rebase-me</span>
+<span class="go">hint: Resolve all conflicts manually, mark them as resolved with</span>
+<span class="go">hint: &quot;git add/rm &lt;conflicted_files&gt;&quot;, then run &quot;git rebase --continue&quot;.</span>
+<span class="go">hint: You can instead skip this commit: run &quot;git rebase --skip&quot;.</span>
+<span class="go">hint: To abort and get back to the state before &quot;git rebase&quot;, run &quot;git rebase --abort&quot;.</span>
+<span class="go">Could not apply 98f36f0... 2nd commit - on branch rebase-me</span>
+</pre></div>
+</div>
+<p>We can resolve this conflict in the way we please.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="c1"># edit text-file.txt</span>
+</pre></div>
+</div>
+<p>Once we are done,
+we can add our changes:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>add<span class="w"> </span>text-file.txt
+</pre></div>
+</div>
+<p>and tell rebase to continue to the next commit:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>rebase<span class="w"> </span>--continue
+</pre></div>
+</div>
+<p>When rebase can automatically merge without commits,
+it will not ask for our intervention,
+but when there are conflicts it will stop and ask us to solve them,
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> the results
+and then use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">--continue</span></code>.</p>
+<p>After all the commits on the current branch are processed,
+we will get a linear commit history for the current branch:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>log<span class="w"> </span>--oneline
+<span class="go">f5b0417 (HEAD -&gt; rebase-me) 3rd commit - on branch rebase-me</span>
+<span class="go">3b514df (rebase-onto-this) Add line at end</span>
+<span class="go">e459dcd Add an intermezzo</span>
+<span class="go">a4cc39e (origin/branch-1, branch-1) 2nd commit - on branch-1</span>
+<span class="go">874ebe0 (origin/main, origin/HEAD, main) First commit</span>
+</pre></div>
+</div>
+<p>We can compare the new commit history
+with the original position of the branch:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>gl<span class="w"> </span>rebase-me<span class="w"> </span>rebase-me-original
+<span class="go">* f5b0417 (HEAD -&gt; rebase-me) 3rd commit - on branch rebase-me</span>
+<span class="go">* 3b514df (rebase-onto-this) Add line at end</span>
+<span class="go">* e459dcd Add an intermezzo</span>
+<span class="go">* a4cc39e (origin/branch-1, branch-1) 2nd commit - on branch-1</span>
+<span class="go">| * d30163f (rebase-me-original) 3rd commit - on branch rebase-me</span>
+<span class="go">| * 98f36f0 2nd commit - on branch rebase-me</span>
+<span class="go">|/  </span>
+<span class="go">* 874ebe0 (origin/main, origin/HEAD, main) First commit</span>
+</pre></div>
+</div>
+<p>As <code class="docutils literal notranslate"><span class="pre">merge</span></code> and <code class="docutils literal notranslate"><span class="pre">cherry-pick</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rebase</span></code> has a <code class="docutils literal notranslate"><span class="pre">--abort</span></code> option.</p>
+<p>If we are not satisfied by the result of the rebase
+after it completed,
+we can use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span> <span class="pre">rebase-me</span></code>
+to determine the last satisfactory commit,
+and use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code> to move the branch
+to point there again.</p>
+<p>Sometimes,
+the same conflicts will need to be solved
+over and over in the same way.
+In such a situation, the <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Rerere"><code class="docutils literal notranslate"><span class="pre">rerere</span></code> command</a>
+(<code class="docutils literal notranslate"><span class="pre">re</span></code>use <code class="docutils literal notranslate"><span class="pre">re</span></code>corded <code class="docutils literal notranslate"><span class="pre">re</span></code>solution)
+may come in handy.</p>
+</section>
+</section>
+<section id="interactive-rebase">
+<h2>Interactive rebase<a class="headerlink" href="#interactive-rebase" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> has an interactive mode
+(that can be entered using the <code class="docutils literal notranslate"><span class="pre">-i</span></code> flag,
+or <code class="docutils literal notranslate"><span class="pre">--interactive</span></code>)
+that can be used to
+perform complex manipulations of
+the commit history in a range.</p>
+<p>It is very powerful,
+and it is also used to clean the commit history
+of a feature branch
+before making a pull request
+(in this case,
+there are lower chances for conflicts
+because we rebase
+on a commit that is already
+an ancestor of the current branch,
+e.g. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">-i</span> <span class="pre">HEAD~3</span></code>).</p>
+<p>It is possible to perform the following actions
+on any commit in the range:</p>
+<ul class="simple">
+<li><p><strong>pick</strong>: keep it in the history;</p></li>
+<li><p><strong>drop</strong>: dropt it from the history;</p></li>
+<li><p><strong>reword</strong>: change only the commit message</p></li>
+<li><p><strong>squash</strong>: remove the commit, but attribute its changes
+to the previous picked commit.</p></li>
+<li><p><strong>edit</strong>: change the files and the commit message
+(even create new commits in the meantime - the opposite of squashing)</p></li>
+<li><p><strong>exec</strong>: pause the rebasing and run a command there (e.g., a test suite)</p></li>
+</ul>
+<p>More information can be read
+from <a class="reference external" href="https://git-scm.com/docs/git-rebase#_interactive_mode">the manual</a>.</p>
+<div class="admonition-interactive-rebase-on-another-branch exercise important admonition" id="exercise-2">
+<p class="admonition-title">Interactive rebase on another branch</p>
+<p>You can practice interactive rebase with</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>rebase-me
+<span class="gp">$ </span>git<span class="w"> </span>reset<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>d30163f<span class="w"> </span>
+<span class="gp">$ </span>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>rebase-onto-this
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tooling/" class="btn btn-neutral float-left" title="Tooling and practices that you might find useful" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../reference/" class="btn btn-neutral float-right" title="Quick reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

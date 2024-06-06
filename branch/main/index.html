@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collaborative distributed version control and troubleshooting @ KIT &mdash; Collaborative distributed version control @ KIT  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_lesson.css?v=0c089442" />
+      <link rel="stylesheet" type="text/css" href="_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=187304be"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=582ca9e2"></script>
+        <script src="_static/minipres.js?v=a0d29692"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script data-domain="coderefinery.github.io" defer="defer" src="https://plausible.cs.aalto.fi/js/script.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex/" />
+    <link rel="search" title="Search" href="search/" />
+    <link rel="next" title="Quick recap on Git Basics: Commits and Branches" href="commits/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Collaborative distributed version control @ KIT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Episodes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="commits/">Quick recap on Git Basics: Commits and Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-states/">Beyond add and commit: undoing mistakes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="archaeology/">Inspecting history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals/">Optional: Git Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="branches/">Operating on Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collaboration-concepts/">Concepts around collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="same-repository/">Collaborating within the same repository: issues and pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-review/">Code review demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forking-workflow/">How to contribute changes to repositories that belong to others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interrupted/">Interrupted work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tooling/">Tooling and practices that you might find useful</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge-tooling/">Merge and beyond</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/">Quick reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/#instructor-guide-original">Instructor guide - original</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mmesiti.github.io/git-intermediate/lesson.pdf">PDF version</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/core/">All lessons</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/">CodeRefinery</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/reusing/">Reusing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Collaborative distributed version control @ KIT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Collaborative distributed version control and troubleshooting &#64; KIT</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/mmesiti/git-intermediate/blob/main/content/index.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="collaborative-distributed-version-control-and-troubleshooting-kit">
+<h1>Collaborative distributed version control and troubleshooting &#64; KIT<a class="headerlink" href="#collaborative-distributed-version-control-and-troubleshooting-kit" title="Link to this heading"></a></h1>
+<p><em>This material was originally developed by <a class="reference external" href="https://coderefinery.org/">CodeRefinery</a>.
+The original material is visible <a class="reference external" href="https://coderefinery.github.io/git-intermediate/">here</a>
+and <a class="reference external" href="https://coderefinery.github.io/git-intro/">here</a>.
+Pull requests and fixes are welcome!</em></p>
+<p>The content of this workshop can be roughly divided in two parts.</p>
+<section id="effective-collaborative-software-development">
+<h2>Effective collaborative software development<a class="headerlink" href="#effective-collaborative-software-development" title="Link to this heading"></a></h2>
+<p>How can we share work on a repository of files with others on the internet?</p>
+<ul class="simple">
+<li><p>Share an archive of the directory using email or using some file sharing service:
+This would lead to many back and forth emails and would be difficult
+keep all copies synchronized.</p></li>
+<li><p>One person’s repository on the web: allows one person to keep track of
+more projects, gain visibility, feedback, and recognition.</p></li>
+<li><p>Common repository for a group: everyone can directly update the same repository.
+Good for small groups.</p></li>
+<li><p>Forks or copies with different owners: anyone can suggest changes, even without
+advance permission. Maintainers approve what they agree with.</p></li>
+</ul>
+<p>Being able to share more easily (going down the above list) is <em>transformative</em>,
+because it allows projects to scale to a new level.
+<strong>This can’t be done without proper tools.</strong></p>
+<p>We will discuss
+the centralized as well as the forking workflows.<br />
+During the workshop,
+you will collaborate in small groups using the same <a class="reference internal" href="reference/#term-forge"><span class="xref std std-term">forge</span></a>.<br />
+Some of the details might not apply to the forge you are using,
+please focus on the general ideas.</p>
+</section>
+<section id="fixing-problems-using-git-and-fixing-git-problems">
+<h2>Fixing problems using Git, and fixing Git problems<a class="headerlink" href="#fixing-problems-using-git-and-fixing-git-problems" title="Link to this heading"></a></h2>
+<p>Version Control has been sometimes described as
+“<em>an unlimited undo button</em>”,
+that offers important ways
+to tackle problems and gain insight during development
+(typically, software development),
+by inspecting the history and the state of all the files involved.</p>
+<p>Of course, using a new tool
+can introduce additional complexity
+on top of an already complex workflow.
+Being in control of the tool
+can guarantee a much productive and stress-free experience,
+especially when collaborating with other people.</p>
+</section>
+</section>
+<section id="expected-learning-outcomes">
+<h1>Expected learning outcomes<a class="headerlink" href="#expected-learning-outcomes" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ol class="arabic simple">
+<li><p>Be able to collaborate with others on remote repositories
+hosted on Git <a class="reference external" href="https://en.wikipedia.org/wiki/Forge_(software)">Forges</a>
+(e.g., GitHub, GitLab and other similar services);</p></li>
+<li><p>Be able to use git tools to diagnose and fix problems in code or documents
+(the content of the repository);</p></li>
+<li><p>Be able to fix common issues encountered
+when deviating from the simplest workflow
+(<em>pull - add - commit - push</em>);</p></li>
+<li><p>Bonus point: fix issues in this repository</p></li>
+</ol>
+</div>
+<div class="admonition-prerequisites prerequisites admonition" id="prerequisites-0">
+<p class="admonition-title">Prerequisites</p>
+<ol class="arabic simple">
+<li><p>Basic understanding of Git.</p></li>
+<li><p>You need an account on a “Forge”, e.g.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com">github.com</a></p></li>
+<li><p><a class="reference external" href="https://gitlab.com">gitlab.com</a></p></li>
+<li><p><a class="reference external" href="https://gitlab.kit.edu">gitlab.kit.edu</a></p></li>
+<li><p><a class="reference external" href="https://codeberg.org">codeberg.org</a></p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Episodes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="commits/">Quick recap on Git Basics: Commits and Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-states/">Beyond add and commit: undoing mistakes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="archaeology/">Inspecting history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals/">Optional: Git Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="branches/">Operating on Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collaboration-concepts/">Concepts around collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="same-repository/">Collaborating within the same repository: issues and pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-review/">Code review demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forking-workflow/">How to contribute changes to repositories that belong to others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interrupted/">Interrupted work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tooling/">Tooling and practices that you might find useful</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge-tooling/">Merge and beyond</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/">Quick reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/#instructor-guide-original">Instructor guide - original</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mmesiti.github.io/git-intermediate/lesson.pdf">PDF version</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/core/">All lessons</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/">CodeRefinery</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/reusing/">Reusing</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="commits/" class="btn btn-neutral float-right" title="Quick recap on Git Basics: Commits and Branches" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

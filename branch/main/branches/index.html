@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operating on Branches &mdash; Collaborative distributed version control @ KIT  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=0c089442" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=187304be"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=582ca9e2"></script>
+        <script src="../_static/minipres.js?v=a0d29692"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script data-domain="coderefinery.github.io" defer="defer" src="https://plausible.cs.aalto.fi/js/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Concepts around collaboration" href="../collaboration-concepts/" />
+    <link rel="prev" title="Optional: Git Internals" href="../internals/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Collaborative distributed version control @ KIT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Episodes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../commits/">Quick recap on Git Basics: Commits and Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git-states/">Beyond add and commit: undoing mistakes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archaeology/">Inspecting history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internals/">Optional: Git Internals</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Operating on Branches</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#demonstration-experimenting-with-branches">Demonstration: experimenting with branches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deleting-branches-also-by-mistake-and-undoing-it">Deleting branches (also by mistake - and undoing it)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#moving-branches-back-to-where-they-pointed">Moving branches back to where they pointed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualizing-branches-efficiently">Visualizing branches efficiently</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../collaboration-concepts/">Concepts around collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../same-repository/">Collaborating within the same repository: issues and pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-review/">Code review demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forking-workflow/">How to contribute changes to repositories that belong to others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupted/">Interrupted work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/">Tooling and practices that you might find useful</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../merge-tooling/">Merge and beyond</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/#instructor-guide-original">Instructor guide - original</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mmesiti.github.io/git-intermediate/lesson.pdf">PDF version</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/core/">All lessons</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/">CodeRefinery</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/reusing/">Reusing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Collaborative distributed version control @ KIT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Operating on Branches</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/mmesiti/git-intermediate/blob/main/content/branches.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="operating-on-branches">
+<h1>Operating on Branches<a class="headerlink" href="#operating-on-branches" title="Link to this heading"></a></h1>
+<p>A <a class="reference external" href="https://coderefinery.github.io/git-intro/reference/#term-branch" title="(in Introduction to version control with Git)"><span class="xref std std-term">branch</span></a> represents independent line of work.
+Git internal structure makes it very easy to implement branches
+as a thin layer of abstraction on its <em>Object database</em>.</p>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand that branches are just pointers to commits</p></li>
+<li><p>Manipulate local branches</p></li>
+</ul>
+</div>
+<p>In this exercise we will look inside the <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory
+in order to learn about
+how branches are implemented in Git,
+and how to use them freely.</p>
+<section id="demonstration-experimenting-with-branches">
+<h2>Demonstration: experimenting with branches<a class="headerlink" href="#demonstration-experimenting-with-branches" title="Link to this heading"></a></h2>
+<p><strong>Branches are pointers to commits</strong> that move over time.</p>
+<p>We are starting from the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch and create an <code class="docutils literal notranslate"><span class="pre">idea</span></code> branch:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>status
+
+<span class="go">On branch main</span>
+<span class="go">nothing to commit, working tree clean</span>
+<span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>idea
+<span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>idea
+<span class="go">Switched to a new branch &#39;idea&#39;</span>
+</pre></div>
+</div>
+<p>(Creating a branch and switching to it
+can be done in a single command
+with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">--create</span> <span class="pre">&lt;branch-name&gt;</span></code>)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>branch
+
+<span class="go">* idea</span>
+<span class="go">  main</span>
+</pre></div>
+</div>
+<p>Let us lift the hood and create few branches “manually”,
+without using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code> command.</p>
+<p>Let us have a look at the <code class="docutils literal notranslate"><span class="pre">refs</span></code> directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls<span class="w"> </span>-l<span class="w"> </span>.git/refs/heads
+
+<span class="go">.rw-r--r-- 41 user 25 Aug 15:54 idea</span>
+<span class="go">.rw-r--r-- 41 user 25 Aug 15:52 main</span>
+</pre></div>
+</div>
+<p>Let us check what the <code class="docutils literal notranslate"><span class="pre">idea</span></code> file looks like
+(do not worry if the hash is different):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>.git/ref/heads/idea
+
+<span class="go">045e3db14740c60684d745e5fb891ae71e335611</span>
+</pre></div>
+</div>
+<p>Now let us replicate this file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cp<span class="w"> </span>.git/refs/heads/idea<span class="w"> </span>.git/refs/heads/idea-2
+<span class="gp">$ </span>cp<span class="w"> </span>.git/refs/heads/idea<span class="w"> </span>.git/refs/heads/idea-3
+</pre></div>
+</div>
+<p>Let us go up two levels and inspect the file <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>.git/HEAD
+
+<span class="go">ref: refs/heads/idea</span>
+</pre></div>
+</div>
+<p>Let us open this file and change it to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ref</span><span class="p">:</span> <span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/</span><span class="n">idea</span><span class="o">-</span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>Now - on which branch are we?</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>branch
+
+<span class="go">  idea</span>
+<span class="go">  idea-2</span>
+<span class="go">* idea-3</span>
+<span class="go">  main</span>
+</pre></div>
+</div>
+<div class="admonition-exercise exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise</p>
+<p>By changing the content of <code class="docutils literal notranslate"><span class="pre">.git/HEAD</span></code>
+we have manually “switched”
+from a branch
+to another one
+that actually points
+to the same commit.</p>
+<p>What would have happened if we changed HEAD to point to a branch
+that does not point to the same commit
+as the one we were on before?
+What would we see with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>?</p>
+</div>
+<div class="admonition-branches-on-different-repositories exercise important admonition" id="exercise-1">
+<p class="admonition-title">Branches on different repositories</p>
+<p>How are branches on different repositories related to each other?</p>
+<div class="admonition-solution solution important dropdown admonition" id="solution-0">
+<p class="admonition-title">Solution</p>
+<p>After creating a branch, one can use the <code class="docutils literal notranslate"><span class="pre">--set-upstream-to</span></code> options</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>&lt;new-branch&gt;
+<span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>&lt;new-branch&gt;<span class="w"> </span>--set-upstream-to<span class="o">=</span>&lt;remote&gt;/&lt;branch&gt;
+</pre></div>
+</div>
+<p>to set the default <em>upstream</em> branch.</p>
+<p>When pushing, it is possible to use the verbose command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>push<span class="w"> </span>&lt;repository&gt;<span class="w"> </span>&lt;local-branch&gt;:&lt;remote-branch&gt;
+</pre></div>
+</div>
+<p>Typically <code class="docutils literal notranslate"><span class="pre">&lt;local-branch&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;remote-branch&gt;</span></code> are the same,
+and <code class="docutils literal notranslate"><span class="pre">:&lt;remote-branch&gt;</span></code> is omitted it is assumed to be equal to <code class="docutils literal notranslate"><span class="pre">&lt;local-branch&gt;</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> can also use the default upstream branch
+if configured correctly:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>push.default<span class="w"> </span>upstream
+</pre></div>
+</div>
+<p>But typically there is no need for such complex setups.</p>
+</div>
+</div>
+</section>
+<section id="deleting-branches-also-by-mistake-and-undoing-it">
+<h2>Deleting branches (also by mistake - and undoing it)<a class="headerlink" href="#deleting-branches-also-by-mistake-and-undoing-it" title="Link to this heading"></a></h2>
+<p>Let us add some work on the branch <code class="docutils literal notranslate"><span class="pre">idea-3</span></code>, and create some additional commits.</p>
+<p>Let’s assume we want to remove the branch <code class="docutils literal notranslate"><span class="pre">idea-2</span></code>,
+to tidy up our repository.</p>
+<p>We first switch to <code class="docutils literal notranslate"><span class="pre">main</span></code>, then try to remove the useless branch</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>switch<span class="w"> </span>main
+<span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>idea-3
+<span class="go">error: The branch &#39;idea-3&#39; is not fully merged.</span>
+</pre></div>
+</div>
+<p>We are sure we want to delete, so we use the <code class="docutils literal notranslate"><span class="pre">-D</span></code> option.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>branch<span class="w"> </span>-D<span class="w"> </span>idea-3
+</pre></div>
+</div>
+<p>We then get distracted and go doing something else.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>clear
+</pre></div>
+</div>
+<p>Wait a moment! We deleted the wrong branch. Is our work lost?
+Using</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>reflog
+</pre></div>
+</div>
+<p>we can see all the last commits pointed at by HEAD,
+and among them there will be the one which was referenced by <code class="docutils literal notranslate"><span class="pre">idea-3</span></code>
+before we deleted it.
+We can check it out and recreate our branch.</p>
+</section>
+<section id="moving-branches-back-to-where-they-pointed">
+<h2>Moving branches back to where they pointed<a class="headerlink" href="#moving-branches-back-to-where-they-pointed" title="Link to this heading"></a></h2>
+<p>When using many commands,
+we move forward the branch we are on.</p>
+<p>We can make a branch point back to where it pointed before
+by switching to it and using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--soft</span></code>.</p>
+<p>If we do not exactly remember where it pointed,
+we can use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span> <span class="pre">&lt;branch</span> <span class="pre">name&gt;</span></code>
+to get an idea of where it was moved.</p>
+</section>
+<section id="visualizing-branches-efficiently">
+<h2>Visualizing branches efficiently<a class="headerlink" href="#visualizing-branches-efficiently" title="Link to this heading"></a></h2>
+<p>When working with branches on the command line,
+it is useful to look at the log with the following command
+(or something similar):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--graph<span class="w"> </span>--all
+</pre></div>
+</div>
+<p>It is inconvenient to type such a long message every time.
+Git allows us to configure an alias for it,
+in this case it will be called <code class="docutils literal notranslate"><span class="pre">graph</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.graph<span class="w"> </span><span class="s2">&quot;log --all --oneline --graph --decorate&quot;</span>
+</pre></div>
+</div>
+<p>After this configuration,
+we will be able to use <code class="docutils literal notranslate"><span class="pre">graph</span></code> as a git command
+with the same effect as the original, longer command.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../internals/" class="btn btn-neutral float-left" title="Optional: Git Internals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../collaboration-concepts/" class="btn btn-neutral float-right" title="Concepts around collaboration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

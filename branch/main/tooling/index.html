@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tooling and practices that you might find useful &mdash; Collaborative distributed version control @ KIT  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=0c089442" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=187304be"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=582ca9e2"></script>
+        <script src="../_static/minipres.js?v=a0d29692"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script data-domain="coderefinery.github.io" defer="defer" src="https://plausible.cs.aalto.fi/js/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Merge and beyond" href="../merge-tooling/" />
+    <link rel="prev" title="Interrupted work" href="../interrupted/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Collaborative distributed version control @ KIT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Episodes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../commits/">Quick recap on Git Basics: Commits and Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git-states/">Beyond add and commit: undoing mistakes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archaeology/">Inspecting history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internals/">Optional: Git Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../branches/">Operating on Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collaboration-concepts/">Concepts around collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../same-repository/">Collaborating within the same repository: issues and pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-review/">Code review demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forking-workflow/">How to contribute changes to repositories that belong to others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupted/">Interrupted work</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tooling and practices that you might find useful</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#difftools-and-merge-tools">Difftools and merge tools.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automation-git-hooks">Automation: Git Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automation-github-actions-gitlab-ci-cd-et-similia">Automation: GitHub Actions, GitLab CI/CD (et similia)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../merge-tooling/">Merge and beyond</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/#instructor-guide-original">Instructor guide - original</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mmesiti.github.io/git-intermediate/lesson.pdf">PDF version</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/core/">All lessons</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/">CodeRefinery</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://coderefinery.org/lessons/reusing/">Reusing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Collaborative distributed version control @ KIT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tooling and practices that you might find useful</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/mmesiti/git-intermediate/blob/main/content/tooling.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tooling-and-practices-that-you-might-find-useful">
+<h1>Tooling and practices that you might find useful<a class="headerlink" href="#tooling-and-practices-that-you-might-find-useful" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>A bird’s eye view of git-related tooling</p></li>
+<li><p>Install and configure 1 tool of your choice so that you can start using it</p></li>
+</ul>
+</div>
+<section id="difftools-and-merge-tools">
+<h2>Difftools and merge tools.<a class="headerlink" href="#difftools-and-merge-tools" title="Link to this heading"></a></h2>
+<p>There are many file types
+for which
+the usual output of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>
+can be
+from difficult to read
+to just completely impossible to understand.</p>
+<ul class="simple">
+<li><p>For Jupyter notebooks: <a class="reference external" href="https://nbdime.readthedocs.io/en/latest/">nbdime</a></p></li>
+<li><p>For Latex: <a class="reference external" href="https://www.ctan.org/pkg/latexdiff">Latexdiff</a> (not git-related)
+and <a class="reference external" href="https://gitlab.com/git-latexdiff/git-latexdiff">git-latexdiff</a>.
+Latex is still a text-based format,
+but a PDF-rendered view of the differences can be more readable.</p></li>
+<li><p>There are also tools for images
+(e.g., <a class="reference external" href="https://github.com/ewanmellor/git-diff-image?tab=readme-ov-file">git-diff-image</a>)</p></li>
+</ul>
+</section>
+<section id="automation-git-hooks">
+<h2>Automation: Git Hooks<a class="headerlink" href="#automation-git-hooks" title="Link to this heading"></a></h2>
+<p>Git can be configured to perform
+some tasks automatically
+when some events happen.</p>
+<p>Most notable tasks:</p>
+<ul class="simple">
+<li><p>auto-formatting: is your code properly formatted?
+This is important because:</p>
+<ul>
+<li><p>proper formatting improves readability</p></li>
+<li><p>consistently using automatic formatting
+makes the output of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> much more informative
+(for easier code reviews)
+There are tools for every language you use:</p></li>
+<li><p>for Python: <a class="reference external" href="https://black.readthedocs.io/en/stable/">black</a></p></li>
+<li><p>for C/C++: <a class="reference external" href="https://clang.llvm.org/docs/ClangFormat.html">clang-format</a></p></li>
+</ul>
+</li>
+<li><p>Linting: there are automated tools that can spot bad practices in writing code</p>
+<ul>
+<li><p>for Python: <a class="reference external" href="https://pylint.readthedocs.io/en/stable/">pylint</a></p></li>
+<li><p>for C/C++: <a class="reference external" href="https://clang.llvm.org/extra/clang-tidy/">clang-tidy</a></p></li>
+<li><p>for bash shell scripts: <a class="reference external" href="https://www.shellcheck.net/">shellcheck</a></p></li>
+</ul>
+</li>
+<li><p>Spellchecking (useful for documentation)</p></li>
+<li><p>compiling/building, deploying services or documentation</p></li>
+<li><p>Launch a test suite</p></li>
+</ul>
+<p>Such tasks can be performed as part of a <em>git hook</em>.
+Git hooks are executable programs
+in the <code class="docutils literal notranslate"><span class="pre">.git/hooks/</span></code> directory.</p>
+<p>The most commonly used is the <em>pre-commit</em> hook,
+which runs when you call <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>, before the commit message is created.
+Auto-formatting, linting tools
+and anything that is quick enough
+can be run here.</p>
+<div class="admonition-try-them-out exercise important admonition" id="exercise-0">
+<p class="admonition-title">Try them out!</p>
+<p>Install and/or configure some of the mentioned tooling
+that can be helpful for your daily workflow.</p>
+</div>
+<p>Another hook typically used is <em>post-receive</em>.
+When it is configured on a remote repository,
+it runs after a push.
+The <em>post-receive</em> hook is typically used
+to start the run of a test suite,
+or to notify other services
+that the push happened.</p>
+</section>
+<section id="automation-github-actions-gitlab-ci-cd-et-similia">
+<h2>Automation: GitHub Actions, GitLab CI/CD (et similia)<a class="headerlink" href="#automation-github-actions-gitlab-ci-cd-et-similia" title="Link to this heading"></a></h2>
+<p>Automation platforms like,
+e.g. <a class="reference external" href="https://docs.github.com/en/actions">GitHub actions</a>
+and <a class="reference external" href="https://docs.gitlab.com/ee/ci/">GitLab CI/CD</a>
+build on top of the idea of the post-receive hook,
+and are commonly used for (including but not limited to):</p>
+<ul class="simple">
+<li><p>run a test suite and present the results in a web interface;</p></li>
+<li><p>build the software and make it available for download;</p></li>
+<li><p>build and deploy documentation.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../interrupted/" class="btn btn-neutral float-left" title="Interrupted work" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../merge-tooling/" class="btn btn-neutral float-right" title="Merge and beyond" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
