@@ -84,7 +84,7 @@ contribute.
      ``` 
   1. Add everything
      ```console
-     git add
+     git add . # '.' means the whole repository
      ```
   1. Create a first commit
      ```console
